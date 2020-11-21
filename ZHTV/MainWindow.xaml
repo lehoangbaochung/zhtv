@@ -5,92 +5,141 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZHTV"
         mc:Ignorable="d"
-        Title="Zither Harp TV - Chat" WindowState="Maximized" WindowStyle="None" ResizeMode="CanResizeWithGrip">
+        Title="Zither Harp TV - Chat" WindowState="Maximized" WindowStyle="None" ResizeMode="CanMinimize">
+    <Window.Resources>
+        
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="C:\Users\Asus\Downloads\5.jpg" TileMode="None" Stretch="Fill"/>
+    </Window.Background>
+    <!-- Nội dung -->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <Grid.RowDefinitions>
             <RowDefinition Height="1.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
+        <!-- Trình phát nhạc -->
+        <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
         <!-- Logo kênh -->
         <Grid Grid.Row="0" Grid.Column="1" >
-            <Image Source="D:\Code\C#\ZHTV\ZHTV\Logo\ZHTV-Logo.png"
+            <Image Source="Images\Logo\ZHTV-Logo.png"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
-                   Margin="100 10 10 0">
+                   Margin="250 10 10 0">
             </Image>
+            <TextBlock x:Name="txtTilte" Text="Trực tiếp" Foreground="White"
+                       FontSize="20" FontWeight="Bold"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Margin="200 110 65 0">
+
+            </TextBlock>
         </Grid>
         <!-- Khung hiển thị ảnh ca sĩ -->
-        <Image Source="D:\Youtube\Zither Harp TV\Artist\Hạ Ninh Cáp\3.jpg"
-               Margin="20">
+        <Image x:Name="imgScreen" Source="D:\Youtube\Zither Harp TV\Artist\Hạ Ninh Cáp\3.jpg"
+               Margin="50">
         </Image>
-        <Image Source="C:\Users\Asus\Downloads\free-digital-Christmas-frame-removebg-preview.png"
-               Stretch="Fill">
-        </Image>
+        <Image x:Name="imgFrame" Source="C:\Users\Asus\Downloads\istockphoto-1080953840-1024x1024-removebg-preview.png" Margin="0 0 0 0" Stretch="Fill"></Image>
         <!-- Khung hiển thị các thuộc tính -->
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
-                <RowDefinition></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition Height="0.75*"></RowDefinition>
+                <RowDefinition Height="4.5*"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            
+
             <!-- Khung hiển thị bài hát -->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <!-- ProgressBar -->
-                <ProgressBar x:Name="prbar1" 
-                             Grid.Column="0" Background="Red"
-                             Margin="10" Width="20">
-                </ProgressBar>
-                <ProgressBar x:Name="prbar2" 
-                             Grid.Column="2" Background="Red"
-                             Margin="10" Width="20">
-                </ProgressBar>
-                <ProgressBar x:Name="prbar3" 
-                             Grid.Column="4" Background="Red"
-                             Margin="10" Width="20">
-                </ProgressBar>
-                <!-- Image -->
-                <Image Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
-                <Image Grid.Column ="3" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
-                <Image Grid.Column ="5" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
+
+                <Grid Grid.Column="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!-- Bài hát 1 -->
+                    <ProgressBar x:Name="prbar1" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img1" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg" Style="{StaticResource imgAlbum}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt1" Text="2" Style="{StaticResource txtID}"></TextBlock>
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!-- Bài hát 2 -->
+                    <ProgressBar x:Name="prbar2" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img2" Grid.Column="1" Source="D:\Youtube\Zither Harp TV\Album\4.jpg" Style="{StaticResource imgAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt2" Text="4" Style="{StaticResource txtID}"></TextBlock>
+                </Grid>
+
+                <Grid Grid.Column="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition Height="0.25*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <!-- Bài hát 3 -->
+                    <ProgressBar x:Name="prbar3" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img3" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\6.jpg" Style="{StaticResource imgAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt3" Text="6" Style="{StaticResource txtID}"></TextBlock>
+                </Grid>
                 <!-- Button -->
-                <Button x:Name="btnSyntax" Grid.Column="7" Margin="10" Width ="100" FontWeight="Bold" 
-                        Content="ZM 123 gửi 6177">
+                <Button x:Name="btnSyntax" Grid.Column="7" 
+                        Width="180" Height="177" FontSize="25"
+                        VerticalAlignment="Top" BorderBrush="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}" OpacityMask="{DynamicResource {x:Static SystemColors.HotTrackBrushKey}}">
+                    <Button.Content>
+                        <TextBlock Background="Black" TextAlignment="Center"></TextBlock>
+                    </Button.Content>
                     <Button.Background>
-                        <ImageBrush ImageSource="ZHsocial+logo.png" Stretch="Uniform"/>
+                        <ImageBrush ImageSource="Images/Logo/Zither Harp-Logo.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
             </Grid>
             <!-- Dòng chữ hiển thị thông tin -->
             <Grid Grid.Row="0">
-                <TextBlock x:Name="txtInfo" 
-                           Margin="20"
-                           FontSize="20"
-                           Text="Xin chào các bạn">
-                </TextBlock>
+                <TextBlock x:Name="txtInfo" Style="{StaticResource txtRun}" VerticalAlignment="Top"></TextBlock>
             </Grid>
             <!-- Dòng chữ hiển thị playlist các bài hát tiếp theo -->
             <Grid Grid.Row="2">
-                <TextBlock x:Name="txtPlaylist" 
-                           Margin="20"
-                           FontSize="20"
-                           Text="Xin chào các bạn">
-                </TextBlock>
+                <TextBlock x:Name="txtPlaylist" Style="{StaticResource txtRun}"/>
+                <!--<TextBlock.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <EventTrigger.Actions>
+                                <BeginStoryboard>
+                                    <Storyboard Duration="00:00:02" RepeatBehavior="Forever" AutoReverse="False">
+                                        <DoubleAnimation From="10" To="1000" Storyboard.TargetName="txtPlaylist" Storyboard.TargetProperty="FontSize"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger.Actions>
+                        </EventTrigger>
+                    </TextBlock.Triggers>-->
             </Grid>
         </Grid>
     </Grid>
