@@ -1,0 +1,97 @@
+﻿<Window x:Class="ZHTV.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZHTV"
+        mc:Ignorable="d"
+        Title="Zither Harp TV - Chat" WindowState="Maximized" WindowStyle="None" ResizeMode="CanResizeWithGrip">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Logo kênh -->
+        <Grid Grid.Row="0" Grid.Column="1" >
+            <Image Source="D:\Code\C#\ZHTV\ZHTV\Logo\ZHTV-Logo.png"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="100 10 10 0">
+            </Image>
+        </Grid>
+        <!-- Khung hiển thị ảnh ca sĩ -->
+        <Image Source="D:\Youtube\Zither Harp TV\Artist\Hạ Ninh Cáp\3.jpg"
+               Margin="20">
+        </Image>
+        <Image Source="C:\Users\Asus\Downloads\free-digital-Christmas-frame-removebg-preview.png"
+               Stretch="Fill">
+        </Image>
+        <!-- Khung hiển thị các thuộc tính -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="3*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <!-- Khung hiển thị bài hát -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <!-- ProgressBar -->
+                <ProgressBar x:Name="prbar1" 
+                             Grid.Column="0" Background="Red"
+                             Margin="10" Width="20">
+                </ProgressBar>
+                <ProgressBar x:Name="prbar2" 
+                             Grid.Column="2" Background="Red"
+                             Margin="10" Width="20">
+                </ProgressBar>
+                <ProgressBar x:Name="prbar3" 
+                             Grid.Column="4" Background="Red"
+                             Margin="10" Width="20">
+                </ProgressBar>
+                <!-- Image -->
+                <Image Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
+                <Image Grid.Column ="3" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
+                <Image Grid.Column ="5" Source="D:\Youtube\Zither Harp TV\Album\2.jpg"></Image>
+                <!-- Button -->
+                <Button x:Name="btnSyntax" Grid.Column="7" Margin="10" Width ="100" FontWeight="Bold" 
+                        Content="ZM 123 gửi 6177">
+                    <Button.Background>
+                        <ImageBrush ImageSource="ZHsocial+logo.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <!-- Dòng chữ hiển thị thông tin -->
+            <Grid Grid.Row="0">
+                <TextBlock x:Name="txtInfo" 
+                           Margin="20"
+                           FontSize="20"
+                           Text="Xin chào các bạn">
+                </TextBlock>
+            </Grid>
+            <!-- Dòng chữ hiển thị playlist các bài hát tiếp theo -->
+            <Grid Grid.Row="2">
+                <TextBlock x:Name="txtPlaylist" 
+                           Margin="20"
+                           FontSize="20"
+                           Text="Xin chào các bạn">
+                </TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
