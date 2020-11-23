@@ -7,7 +7,7 @@ namespace ZHTV.Models
         public int ID { set; get; }
         public string Name { set; get; }
         public string Artist { set; get; }
-        public List<string> UserID = new List<string>();
+        public Dictionary<string, string> User = new Dictionary<string, string>();
 
         // override object.Equals
         public override bool Equals(object obj)

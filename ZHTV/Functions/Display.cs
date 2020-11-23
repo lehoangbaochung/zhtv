@@ -11,9 +11,9 @@ namespace ZHTV.Functions
         static readonly string artistPhotoPath = @"D:\Youtube\Zither Harp TV\Artist\";
         static readonly Random rd = new Random();
 
-        public static string SongURL() // trả về địa chỉ của bài hát tiếp theo
+        public static string SongURL(Song s) // trả về địa chỉ của bài hát tiếp theo
         {
-            return @"D:\Youtube\Zither Harp TV\Music\" + Manager.Playlist[0].ID + ".mp3";
+            return @"D:\Youtube\Zither Harp TV\Music\" + s.ID + ".mp3";
         }
 
         public static string SongID(Song s)
@@ -33,7 +33,7 @@ namespace ZHTV.Functions
 
         public static int OrderCount(Song s)
         {
-            return s.UserID.Count;
+            return s.User.Count;
         }
 
         public static string Playlist()
@@ -46,23 +46,30 @@ namespace ZHTV.Functions
 
         public static string[] Info()
         {
-            string[] info = { "Mọi thông tin đóng góp và ý kiến xin vui lòng gửi tin nhắn về trang facebook của kênh tại địa chỉ: m.me/zither.harp",
-                "Nếu các bạn yêu mến Zither Harp xin hãy ủng hộ mình qua tài khoản ngân hàng Viettinbank với số tài khoản 108869372829",
+            string[] info = { "Mọi thông tin đóng góp và ý kiến vui lòng gửi tin nhắn về trang facebook của kênh Zither Harp tại địa chỉ: http://m.me/zither.harp",
+                "Nếu các bạn yêu thích Zither Harp xin hãy ủng hộ cho kênh qua tài khoản ngân hàng Viettinbank với số tài khoản 108869372829",
                 "Để xem mã số của tất cả các bài hát vui lòng truy cập địa chỉ http://megaurl.in/cL4t",
-                "Nếu các bạn muốn yêu cầu vietsub bài hát hãy điền thông tin của bài hát đó tại địa chỉ http://megaurl.in/MAGJkie" };
+                "Mọi yêu cầu vietsub bài hát vui lòng điền thông tin của bài hát đó tại địa chỉ http://megaurl.in/MAGJkie",
+                "Để bình chọn cho ca khúc mình yêu thích vui lòng soạn tin theo cú pháp ZM mã_bài_hát hoặc ZMT tên_bài_hát gửi vào hộp thoại trò chuyện",
+                "Kênh truyền hình âm nhạc tương tác trực tiếp dành cho giới trẻ ZHTV phát sóng đều đặn vào tối các ngày thứ 7 và chủ nhật hàng tuần. Kính mong các quý khán giả chú ý đón xem!",
+                "Để giao lưu, học hỏi, trao đổi kiến thức với mọi người và chia sẻ, thảo luận về các ca khúc các bạn có thể tham gia vào nhóm I & Zither Harp " +
+                "tại địa chỉ http://facebook.com/groups/zither.harp",
+                "Từ ngày 1/11/2020, địa chỉ liên kết tải nhạc sẽ được để phía dưới phần bình luận của mỗi video được đăng tải (bình luận đã được ghim)",
+                "Trước khi xem bất kỳ video vietsub nào trên kênh này hãy chắc chắn rằng phụ đề CC (phụ đề rời của Youtube) đã được bật 👌",
+                "Từ ngày 9/9/2020, kênh ZHTV chính thức chuyển phát sóng từ kênh Zither Harp sang kênh Zither Harp TV trên hạ tầng của Youtube" };
             return info;
         }
 
         public static string SyntaxOrder()
         {
-            return "ZM " + Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Keys.Count)).Key + "\ngửi\n6" + rd.Next(1, 7) + "77";
+            return "ZM " + Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Keys.Count)).Key;
         }
 
-        public static string ArtistPhotoPath(int id)
+        public static string ArtistPhotoPath(Song song)
         {
-            string[] art = Manager.SongDict[id].Artist.Split('&');
-            // check exist
+            string[] art = song.Artist.Split('&');
             string path = null;
+
             for (int i = art.Length - 1; i >= 0; i--)
             {
                 if (Array.Exists(ArtistPhotoFolder, s => s.Equals(artistPhotoPath + art[i].Trim())) == true
@@ -70,11 +77,10 @@ namespace ZHTV.Functions
                 {
                     string[] photoAlbum = Directory.GetFiles(artistPhotoPath + art[i].Trim());
                     path = photoAlbum[rd.Next(0, photoAlbum.Length)];
+                    break;
                 }
                 else
-                {
                     path = @"D:\Youtube\Zither Harp TV\Background\QC1.png";
-                }
             }
             return path;
 
