@@ -56,9 +56,6 @@
     <Reference Include="Google.Apis.Sheets.v4, Version=1.49.0.2141, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Sheets.v4.1.49.0.2141\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio, Version=1.10.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.10.0\lib\net35\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -86,7 +83,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Interface\Chat\Chat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -95,12 +92,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Functions\Display.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Interface\Chat\Chat.xaml.cs">
+      <DependentUpon>Chat.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Interface\Music\Dictionary1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Page Include="Interface\Music\Music.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\Music\Music.xaml.cs">
+      <DependentUpon>Music.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Models\Sheet.cs" />
     <Compile Include="Functions\Manager.cs" />
     <Compile Include="Models\Order.cs" />
@@ -132,9 +147,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ZHsocial+logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\Logo\ZHTV-Logo.png" />
     <Resource Include="Images\Logo\Zither Harp-Logo.png" />
   </ItemGroup>
@@ -143,9 +155,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Images\Background\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="background-trung-thu-hoat-hinh_105500275.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

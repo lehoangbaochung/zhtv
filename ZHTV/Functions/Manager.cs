@@ -11,7 +11,7 @@ namespace ZHTV.Models
         public static List<Song> Playlist = new List<Song>();
         public static Dictionary<int, Song> SongDict = Sheet.SongDict(Sheet.GetData("1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo", "A2:C"));
         public static Dictionary<string, Order> OrderList = Sheet.OrderList(Sheet.GetData("1oycbgNJEVF9cqLE8l701YZyyk4fkRT5P9XbMov4UiAI", "11/2020!A3:H"));
-        public static string[] BannedUser = { "UCXFJWYITT6jlkuzZOoa980g", "UCcsoaAFMYO9gOXDCjiB6fEw", "UCXiF7lSlg3tYTynabRiNURA"};
+        static string[] BannedUser = { "UCcsoaAFMYO9gOXDCjiB6fEw", "UCXiF7lSlg3tYTynabRiNURA"};
         static readonly Random rd = new Random();
         static int count = OrderList.Count;
         static int addIndex = 0;
@@ -61,33 +61,31 @@ namespace ZHTV.Models
             
             if (index == -1) // Bài hát chưa được order, thêm vào list
             {                
-                var oldSong = SongDict[order.SongID];               
-                oldSong.User.Add(order.UserID, order.UserName);
-                var newSong = oldSong;
-                Playlist.Remove(oldSong);
-                Sort(newSong);
+                var song = SongDict[order.SongID];
+                Sort(song, order);
             }
             else // nếu ng dùng vote bài đã có trong list
             {
-                var oldSong = Playlist[index];
+                var song = Playlist[index];
 
-                if (!oldSong.User.ContainsKey(order.UserID)) // nếu ng dùng chưa vote bài này
+                if (!song.User.ContainsKey(order.UserID)) // nếu ng dùng chưa vote bài này
                 {
-                    oldSong.User.Add(order.UserID, order.UserName);
-                    var newSong = oldSong;
-                    Playlist.Remove(oldSong);
-                    Sort(newSong);
+                    Sort(song, order);
                 }
             }      
         }
 
-        private static void Sort(Song s)
+        private static void Sort(Song oldSong, Order order)
         {
+            oldSong.User.Add(order.UserID, order.UserName);
+            var newSong = oldSong;
+            Playlist.Remove(oldSong);
+
             for (int i = 0; i < Playlist.Count; i++)
             {
-                if (s.User.Count > Playlist[i].User.Count)
+                if (newSong.User.Count > Playlist[i].User.Count)
                 {
-                    Playlist.Insert(i, s);
+                    Playlist.Insert(i, newSong);
                     break;
                 }
             }

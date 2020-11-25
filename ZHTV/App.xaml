@@ -61,6 +61,34 @@
                     </Grid>
                 </Grid>
             </ControlTemplate>
+            <!-- Thanh vote ngang -->
+            <Style x:Key="HozirontalProgressBar" TargetType="ProgressBar">
+                <Setter Property="Foreground" Value="Red"></Setter>
+                <Setter Property="Background" Value="Transparent"></Setter>
+                <Setter Property="BorderBrush" Value="Transparent"></Setter>
+                <Setter Property="Height" Value="20"></Setter>
+                <Setter Property="Width" Value="300"></Setter>
+                <Setter Property="Margin" Value="15 10 15 10"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                <Setter Property="Value" Value="10"></Setter>
+            </Style>
+            <!-- Mã bài hát -->
+            <Style x:Key="HozirontalTextBlockSongID" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="Yellow"></Setter>
+                <Setter Property="FontSize" Value="25"></Setter>
+                <Setter Property="Margin" Value="15 -5 15 0"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property="TextTrimming" Value="WordEllipsis"></Setter>
+            </Style>
+            <Style x:Key="HorizontalTextBlockPlaylist" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Margin" Value="1000 0 0 10"></Setter>
+                <Setter Property="FontSize" Value="22"></Setter>
+                <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

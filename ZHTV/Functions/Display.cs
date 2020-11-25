@@ -26,9 +26,21 @@ namespace ZHTV.Functions
             return @"D:\Youtube\Zither Harp TV\Album\" + s.ID + ".jpg";
         }
 
+        public static string SongName(Song s)
+        {
+            return s.ID + ": " + s.Name;
+        }
+
         public static string PlayingSongName() // trả về tên của bài hát đang phát
         {
-            return " ▶ " + Manager.Playlist[0].ID + ": " + Manager.Playlist[0].Name + " - " + Manager.Playlist[0].Artist.Replace('&', '/');
+            string PlayingSongName;
+            if (Manager.Playlist[0].User.Count == 0)
+                PlayingSongName = " Bài đang phát: " + Manager.Playlist[0].Name + " \n Thể hiện: " + Manager.Playlist[0].Artist
+               + " \n Mã số: " + Manager.Playlist[0].ID;
+            else
+                PlayingSongName = " Khán giả yêu cầu nhiều nhất: " + Manager.Playlist[0].User.ElementAt(Manager.Playlist[0].User.Count - 1).Value
+               + " \n Bài đang phát: " + Manager.Playlist[0].Name + " \n Thể hiện: " + Manager.Playlist[0].Artist + " \n Mã số: " + Manager.Playlist[0].ID;
+            return PlayingSongName;
         }
 
         public static int OrderCount(Song s)
@@ -62,7 +74,7 @@ namespace ZHTV.Functions
 
         public static string SyntaxOrder()
         {
-            return "ZM " + Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Keys.Count)).Key;
+            return "Soạn tin: ZM " + Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
         }
 
         public static string ArtistPhotoPath(Song song)

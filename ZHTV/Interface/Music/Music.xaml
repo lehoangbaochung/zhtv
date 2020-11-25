@@ -1,0 +1,98 @@
+﻿<Window x:Class="ZHTV.Interface.Music.Music"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ZHTV.Interface.Music"
+        mc:Ignorable="d"
+        Title="Zither Harp TV - Music" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize">
+    <!--<Window.Resources>
+        <ResourceDictionary Source="D:\Code\C#\ZHTV\ZHTV\Interface\Music\Dictionary1.xaml"></ResourceDictionary>
+    </Window.Resources>-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Trình phát nhạc -->
+        <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
+        <!-- Ảnh màn hình -->
+        <Image x:Name="imgScreen" Source="D:\Youtube\Zither Harp TV\Background\QC1.png" Margin="10"></Image>
+            <!-- Logo kênh -->
+        <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png" Margin="1150 50 10 0"
+                HorizontalAlignment="Right" VerticalAlignment="Top">
+        </Image>
+        <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1080 10 120 500"
+                HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
+        <TextBlock x:Name="txtTilte" Text="Trực tiếp" Foreground="Black"
+                    FontSize="22" FontWeight="Bold"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Margin="500 150 70 0">
+        </TextBlock>
+
+        <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock x:Name="txtInfo" Text="" FontSize="22" Margin="700 0 300 10" VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock x:Name="txtOrder" Text="" FontSize="22" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
+        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\33.jpg" Stretch="UniformToFill"></Image>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.15*"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Button x:Name="btnLogo" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0" Click="btnLogo_Click" BorderBrush="Transparent">
+                <Button.Background>
+                    <ImageBrush ImageSource="D:\Code\C#\ZHTV\ZHTV\Images\Logo\Zither Harp-Logo.png" Stretch="Uniform"></ImageBrush>
+                </Button.Background>
+            </Button>
+            <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\5bbc0811de645-removebg-preview.png" Stretch="Fill"></Image>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.5*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!-- Playlist -->
+                <TextBlock Grid.Row="1" x:Name="txtPlaylist" Text="Hello" Style="{StaticResource HorizontalTextBlockPlaylist}"></TextBlock>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ProgressBar x:Name="prbSong1" Style="{StaticResource HozirontalProgressBar}"></ProgressBar>
+                        <TextBlock Grid.Row="1" x:Name="txtSong1" Text="344: Hello" Style="{StaticResource HozirontalTextBlockSongID}"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ProgressBar x:Name="prbSong2" Style="{StaticResource HozirontalProgressBar}"></ProgressBar>
+                        <TextBlock Grid.Row="1" x:Name="txtSong2" Text="123: Hello" Style="{StaticResource HozirontalTextBlockSongID}"></TextBlock>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                        <ProgressBar x:Name="prbSong3" Style="{StaticResource HozirontalProgressBar}"></ProgressBar>
+                        <TextBlock Grid.Row="1" x:Name="txtSong3" Text="344: Hello" Style="{StaticResource HozirontalTextBlockSongID}"></TextBlock>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
