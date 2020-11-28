@@ -15,7 +15,6 @@ namespace ZHTV.Models
         static readonly string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
         static readonly string ApplicationName = "Google SpeadSheet";
         static readonly Dictionary<int, Song> Song = new Dictionary<int, Song>();
-        static readonly Dictionary<string, Order> Order = new Dictionary<string, Order>();
         static IList<IList<object>> values;
 
         public static IList<IList<object>> GetData(string id, string range)
@@ -31,7 +30,7 @@ namespace ZHTV.Models
             var service = new SheetsService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
-                ApplicationName = ApplicationName,
+                ApplicationName = ApplicationName
             });
 
             SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(id, range);
@@ -47,23 +46,15 @@ namespace ZHTV.Models
                 foreach (var row in values)
                 {
                     if (!Song.ContainsKey(Convert.ToInt32(row[0])))
-                        Song.Add(Convert.ToInt32(row[0]), new Song { ID = Convert.ToInt32(row[0]), Name = row[1].ToString(), Artist = row[2].ToString() });
+                        Song.Add(Convert.ToInt32(row[0]), new Song 
+                        { 
+                            ID = Convert.ToInt32(row[0]), 
+                            Name = row[1].ToString(), 
+                            Artist = row[2].ToString() 
+                        });
                 }
             }
             return Song;
-        }
-
-        public static Dictionary<string, Order> OrderList(IList<IList<object>> values)
-        {
-            if (values != null && values.Count > 0)
-            {
-                foreach (var row in values)
-                {
-                    if (!Order.ContainsKey(row[1].ToString()))
-                        Order.Add(row[1].ToString(), new Order() { UserID = row[5].ToString(), UserName = row[2].ToString(), SongID = Convert.ToInt32(row[4]) });
-                }
-            }
-            return Order;
         }
     }
 }

@@ -1,20 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using ZHTV.Interface;
-using ZHTV.Models;
-using ZHTV.Functions;
-using ZHTV.Interface.Music;
 
 namespace ZHTV
 {
@@ -23,6 +8,7 @@ namespace ZHTV
         public MainWindow()
         {
             InitializeComponent();
+            Interface();
         }
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
@@ -37,6 +23,35 @@ namespace ZHTV
             Music m = new Music();
             m.Show();
             Hide();
+        }
+
+        private void Interface()
+        {
+               
+        }
+
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            tbxVideoID.IsEnabled = rbOn.IsChecked.Value;
+            tbxSheetID.IsEnabled = rbOn.IsChecked.Value;
+            tbxSheetTab.IsEnabled = rbOn.IsChecked.Value;
+            tbxSheetRange.IsEnabled = rbOn.IsChecked.Value;
+        }
+
+        private void btnStart_Click(object sender, RoutedEventArgs e)
+        {
+            if (cbInterface.SelectedIndex == 0)
+            {
+                Chat c = new Chat();
+                c.Show();
+                Hide();
+            } 
+            else if (cbInterface.SelectedIndex == 1)
+            {
+                Music m = new Music();
+                m.Show();
+                Hide();
+            }    
         }
     }
 }

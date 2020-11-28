@@ -56,6 +56,9 @@
     <Reference Include="Google.Apis.Sheets.v4, Version=1.49.0.2141, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.Sheets.v4.1.49.0.2141\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis.YouTube.v3, Version=1.49.0.2148, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.YouTube.v3.1.49.0.2148\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -83,7 +86,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Interface\Chat\Chat.xaml">
+    <Page Include="Interface\Chat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -92,34 +95,44 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Functions\Display.cs" />
-    <Compile Include="Interface\Chat\Chat.xaml.cs">
+    <Compile Include="Interface\Music.xaml.cs">
+      <DependentUpon>Music.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Levenshtein.cs" />
+    <Compile Include="Interface\Chat.xaml.cs">
       <DependentUpon>Chat.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Interface\Music.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionary\ChatRD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="Interface\Music\Dictionary1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Resource>
-    <Page Include="Interface\Music\Music.xaml">
+    <Page Include="ResourceDictionary\MainRD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Resource Include="ResourceDictionary\MusicRD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\Music\Music.xaml.cs">
-      <DependentUpon>Music.xaml</DependentUpon>
-    </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Sheet.cs" />
-    <Compile Include="Functions\Manager.cs" />
+    <Compile Include="Functions\Manage.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Song.cs" />
+    <Compile Include="Models\Youtube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -142,6 +155,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\SongList - Vietnamese.json" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

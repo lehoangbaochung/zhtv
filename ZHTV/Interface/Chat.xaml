@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="Zither Harp TV - Chat" WindowState="Maximized" WindowStyle="None" ResizeMode="CanMinimize">
     <Window.Background>
-        <ImageBrush ImageSource="C:\Users\Asus\Downloads\5.jpg" TileMode="None" Stretch="Fill"/>
+        <ImageBrush ImageSource="D:\Youtube\Zither Harp TV\Background\Christmas\5.jpg" TileMode="None" Stretch="Fill"/>
     </Window.Background>
     <!-- Nội dung -->
     <Grid>
@@ -70,9 +70,9 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 1 -->
-                    <ProgressBar x:Name="prbar1" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img1" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg" Style="{StaticResource imgAlbum}"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt1" Text="2" Style="{StaticResource txtID}"></TextBlock>
+                    <ProgressBar x:Name="prbar1" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img1" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt1" Text="2" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -86,9 +86,9 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 2 -->
-                    <ProgressBar x:Name="prbar2" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img2" Grid.Column="1" Source="D:\Youtube\Zither Harp TV\Album\4.jpg" Style="{StaticResource imgAlbum}"></Image>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt2" Text="4" Style="{StaticResource txtID}"></TextBlock>
+                    <ProgressBar x:Name="prbar2" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img2" Grid.Column="1" Source="D:\Youtube\Zither Harp TV\Album\4.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt2" Text="4" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="2">
@@ -102,9 +102,9 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 3 -->
-                    <ProgressBar x:Name="prbar3" Style="{StaticResource prbarRed}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img3" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\6.jpg" Style="{StaticResource imgAlbum}"></Image>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt3" Text="6" Style="{StaticResource txtID}"></TextBlock>
+                    <ProgressBar x:Name="prbar3" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="img3" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\6.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt3" Text="6" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
                 <!-- Button -->
                 <Button x:Name="btnSyntax" Grid.Column="7" Click="btnSyntax_Click"
@@ -119,11 +119,11 @@
             </Grid>
             <!-- Dòng chữ hiển thị thông tin -->
             <Grid Grid.Row="0">
-                <TextBlock x:Name="txtInfo" Style="{StaticResource txtRun}" VerticalAlignment="Top"></TextBlock>
+                <TextBlock x:Name="txtInfo" Style="{StaticResource ResourceKey=TextBlockRun}" VerticalAlignment="Top"></TextBlock>
             </Grid>
             <!-- Dòng chữ hiển thị playlist các bài hát tiếp theo -->
             <Grid Grid.Row="2">
-                <TextBlock x:Name="txtPlaylist" Style="{StaticResource txtRun}"/>
+                <TextBlock x:Name="txtPlaylist" Style="{StaticResource ResourceKey=TextBlockRun}"/>
                 <!--<TextBlock.Triggers>
                         <EventTrigger RoutedEvent="FrameworkElement.Loaded">
                             <EventTrigger.Actions>

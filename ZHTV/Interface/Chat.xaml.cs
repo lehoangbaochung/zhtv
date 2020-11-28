@@ -17,9 +17,9 @@ namespace ZHTV
         public Chat()
         {
             InitializeComponent();
-            Player.Source = new Uri(Display.SongURL(Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Count)).Value));
-            Manager.FillNextSongs();
-            Manager.Playlist.RemoveAt(0);
+            Player.Source = new Uri(Display.SongURL(Manage.SongDict.ElementAt(rd.Next(1, Manage.SongDict.Count)).Value));
+            Manage.FillNextSongs();
+            Manage.Playlist.RemoveAt(0);
             Interface();
             Timer();
         }
@@ -47,7 +47,7 @@ namespace ZHTV
 
                 if (x2 == -1500)
                 {
-                    x2 = 900;
+                    x2 = 600;
                     txtInfo.Margin = new Thickness(x2, txtInfo.Margin.Top, txtInfo.Margin.Right, txtInfo.Margin.Bottom);
                     txtInfo.Text = Display.Info()[rd.Next(0, Display.Info().Length)];
                 }   
@@ -80,16 +80,16 @@ namespace ZHTV
 
                 if (Player.Position == Player.NaturalDuration)
                 {
-                    Player.Source = new Uri(Display.SongURL(Manager.Playlist[0]));
+                    Player.Source = new Uri(Display.SongURL(Manage.Playlist[0]));
                     DisplayScreen();
-                    Manager.FillNextSongs();
+                    Manage.FillNextSongs();
                     Interface();
                 }  
             };
 
             OrderTimer.Tick += (s, e) =>
             {
-                Manager.OrderMultipleSongs();
+                Manage.OrderMultipleSongs();
                 Interface();
             };
 
@@ -101,19 +101,19 @@ namespace ZHTV
         private void DisplayScreen()
         {
             // hiển thị tên bài đang phát
-            if (Manager.Playlist[0].User.Count == 0)
-                txtNextSong.Text = " Bài đang phát: " + Manager.Playlist[0].Name + "\n Thể hiện: " + Manager.Playlist[0].Artist
-               + "\n Mã số: " + Manager.Playlist[0].ID;
+            if (Manage.Playlist[0].User.Count == 0)
+                txtNextSong.Text = " Bài đang phát: " + Manage.Playlist[0].Name + "\n Thể hiện: " + Manage.Playlist[0].Artist
+               + "\n Mã số: " + Manage.Playlist[0].ID;
             else
-                txtNextSong.Text = " Khán giả yêu cầu nhiều nhất: " + Manager.Playlist[0].User.ElementAt(0).Value
-               + "\n Bài đang phát: " + Manager.Playlist[0].Name + "\n Thể hiện: " + Manager.Playlist[0].Artist + "\n Mã số: " + Manager.Playlist[0].ID;
+                txtNextSong.Text = " Khán giả yêu cầu nhiều nhất: " + Manage.Playlist[0].User.ElementAt(0).Value
+               + "\n Bài đang phát: " + Manage.Playlist[0].Name + "\n Thể hiện: " + Manage.Playlist[0].Artist + "\n Mã số: " + Manage.Playlist[0].ID;
             txtNextSong.Background = Brushes.White;
 
             // hiển thị ảnh ca sĩ
             var bi = new BitmapImage();
             bi.BeginInit();
             bi.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-            bi.UriSource = new Uri(Display.ArtistPhotoPath(Manager.Playlist[0]));
+            bi.UriSource = new Uri(Display.ArtistPhotoPath(Manage.Playlist[0]));
             bi.EndInit();
             imgScreen.Source = bi;
             imgScreen.Stretch = Stretch.Uniform;
@@ -129,36 +129,36 @@ namespace ZHTV
             // hiển thị playlist
             txtPlaylist.Text = Display.Playlist();
             // hiển thị mã số bài hát
-            txt1.Text = Display.SongID(Manager.Playlist[0]);
-            txt2.Text = Display.SongID(Manager.Playlist[1]);
-            txt3.Text = Display.SongID(Manager.Playlist[2]);
+            txt1.Text = Display.SongID(Manage.Playlist[0]);
+            txt2.Text = Display.SongID(Manage.Playlist[1]);
+            txt3.Text = Display.SongID(Manage.Playlist[2]);
             // hiển thị ảnh bìa bài hát
             var bi1 = new BitmapImage();
             bi1.BeginInit();
             bi1.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-            bi1.UriSource = new Uri(Display.SongImage(Manager.Playlist[0]));
+            bi1.UriSource = new Uri(Display.SongImage(Manage.Playlist[0]));
             bi1.EndInit();
             img1.Source = bi1;
             //
             var bi2 = new BitmapImage();
             bi2.BeginInit();
             bi2.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-            bi2.UriSource = new Uri(Display.SongImage(Manager.Playlist[1]));
+            bi2.UriSource = new Uri(Display.SongImage(Manage.Playlist[1]));
             bi2.EndInit();
             img2.Source = bi2;
             //
             var bi3 = new BitmapImage();
             bi3.BeginInit();
             bi3.CreateOptions = BitmapCreateOptions.IgnoreColorProfile;
-            bi3.UriSource = new Uri(Display.SongImage(Manager.Playlist[2]));
+            bi3.UriSource = new Uri(Display.SongImage(Manage.Playlist[2]));
             bi3.EndInit();
             img3.Source = bi3;
             // hiển thị số lượt vote
             if (prbar1.Value < prbar1.Maximum && prbar2.Value < prbar2.Maximum && prbar3.Value < prbar3.Maximum)
             {
-                prbar1.Value = Display.OrderCount(Manager.Playlist[0]) * 10 + 10;
-                prbar2.Value = Display.OrderCount(Manager.Playlist[1]) * 10 + 10;
-                prbar3.Value = Display.OrderCount(Manager.Playlist[2]) * 10 + 10;
+                prbar1.Value = Display.OrderCount(Manage.Playlist[0]) * 10 + 10;
+                prbar2.Value = Display.OrderCount(Manage.Playlist[1]) * 10 + 10;
+                prbar3.Value = Display.OrderCount(Manage.Playlist[2]) * 10 + 10;
             } 
         }
 

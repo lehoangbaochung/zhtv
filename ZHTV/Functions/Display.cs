@@ -11,48 +11,48 @@ namespace ZHTV.Functions
         static readonly string artistPhotoPath = @"D:\Youtube\Zither Harp TV\Artist\";
         static readonly Random rd = new Random();
 
-        public static string SongURL(Song s) // trả về địa chỉ của bài hát tiếp theo
+        public static string SongURL(Song song) // trả về địa chỉ của bài hát tiếp theo
         {
-            return @"D:\Youtube\Zither Harp TV\Music\" + s.ID + ".mp3";
+            return @"D:\Youtube\Zither Harp TV\Music\" + song.ID + ".mp3";
         }
 
-        public static string SongID(Song s)
+        public static string SongID(Song song)
         {
-            return s.ID.ToString();
+            return song.ID.ToString();
         }
 
-        public static string SongImage(Song s)
+        public static string SongImage(Song song)
         {
-            return @"D:\Youtube\Zither Harp TV\Album\" + s.ID + ".jpg";
+            return @"D:\Youtube\Zither Harp TV\Album\" + song.ID + ".jpg";
         }
 
-        public static string SongName(Song s)
+        public static string SongName(Song song)
         {
-            return s.ID + ": " + s.Name;
+            return song.ID + ": " + song.Name;
         }
 
         public static string PlayingSongName() // trả về tên của bài hát đang phát
         {
-            string PlayingSongName;
-            if (Manager.Playlist[0].User.Count == 0)
-                PlayingSongName = " Bài đang phát: " + Manager.Playlist[0].Name + " \n Thể hiện: " + Manager.Playlist[0].Artist
-               + " \n Mã số: " + Manager.Playlist[0].ID;
+            string songName;
+            if (Manage.Playlist[0].User.Count == 0)
+                songName = " Bài đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist
+               + " \n Mã số: " + Manage.Playlist[0].ID;
             else
-                PlayingSongName = " Khán giả yêu cầu nhiều nhất: " + Manager.Playlist[0].User.ElementAt(Manager.Playlist[0].User.Count - 1).Value
-               + " \n Bài đang phát: " + Manager.Playlist[0].Name + " \n Thể hiện: " + Manager.Playlist[0].Artist + " \n Mã số: " + Manager.Playlist[0].ID;
-            return PlayingSongName;
+                songName = " Khán giả yêu cầu nhiều nhất: " + Manage.Playlist[0].User.ElementAt(Manage.Playlist[0].User.Count - 1).Value
+               + " \n Bài đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID;
+            return songName;
         }
 
-        public static int OrderCount(Song s)
+        public static int OrderCount(Song song)
         {
-            return s.User.Count;
+            return song.User.Count;
         }
 
         public static string Playlist()
         {
             string playlist = null;
             for (int i = 0; i < 15; i++)
-                playlist += Manager.Playlist[i].ID + ": " + Manager.Playlist[i].Name + " ";
+                playlist += Manage.Playlist[i].ID + ": " + Manage.Playlist[i].Name + " ";
             return playlist;
         }
 
@@ -74,7 +74,7 @@ namespace ZHTV.Functions
 
         public static string SyntaxOrder()
         {
-            return "Soạn tin: ZM " + Manager.SongDict.ElementAt(rd.Next(1, Manager.SongDict.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
+            return "Soạn tin: ZM " + Manage.SongDict.ElementAt(rd.Next(1, Manage.SongDict.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
         }
 
         public static string ArtistPhotoPath(Song song)

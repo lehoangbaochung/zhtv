@@ -5,9 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ZHTV"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Zither Harp TV" Height="450" Width="800" ResizeMode="NoResize">
     <Grid>
-        <Button x:Name="btnSelect" Content="Chat" Click="btnSelect_Click" HorizontalAlignment="Left"></Button>
-        <Button x:Name="btnSelect1" Content="Music" Click="btnSelect1_Click" HorizontalAlignment="Right"></Button>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TabControl TabStripPlacement="Left">
+            <TabItem Header="Stream">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <GroupBox Header="Stream"/>
+                    <Grid Grid.Row="0" Grid.Column="0">
+                        <StackPanel Margin="20" Grid.Row="0" Grid.Column="0">
+                            <Label Content="_ID livestream:" ></Label>
+                            <TextBox x:Name="tbxVideoID" HorizontalAlignment="Stretch"></TextBox>
+                            <Label Content="_Sheet:" ></Label>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                                <TextBlock Margin="5">ID</TextBlock>
+                                <TextBox x:Name="tbxSheetID" Width="200" Margin="0 5 5 5">1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo</TextBox>
+                                <TextBlock Margin="5">Tab page</TextBlock>
+                                <TextBox x:Name="tbxSheetTab" Width="100" Margin="5">11/2020</TextBox>
+                                <TextBlock Margin="5">Range</TextBlock>
+                                <TextBox x:Name="tbxSheetRange" Width="100" Margin="5">A2:C</TextBox>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Security" />
+            <TabItem Header="Details" />
+        </TabControl>
+        <!--<TabItem Header="Danh mục" Tag="/Images/Daily Activity/video_red.png" DataContext="/Images/Daily Activity/video_gray.png" Template="{DynamicResource tabItemTemplate}"></TabItem>-->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal">
+                <TextBlock Text="Mode:" VerticalAlignment="Center"></TextBlock>
+                <RadioButton x:Name="rbOff" GroupName="Mode" Content="Offline" VerticalAlignment="Center" Checked="RadioButton_Checked"></RadioButton>
+                <RadioButton x:Name="rbOn" GroupName="Mode" IsChecked="True" Content="Online" VerticalAlignment="Center" Checked="RadioButton_Checked"></RadioButton>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Interface:" Margin="20" VerticalAlignment="Center"></TextBlock>
+                <ComboBox x:Name="cbInterface" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <ComboBoxItem Content="Chat"></ComboBoxItem>
+                    <ComboBoxItem Content="Music" IsSelected="True"></ComboBoxItem>
+                </ComboBox>
+                <Button x:Name="btnStart" Margin="20" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnStart_Click"></Button>
+            </StackPanel>
+            <StackPanel>
+
+                <Button x:Name="btnSelect" Content="Chat" Click="btnSelect_Click" HorizontalAlignment="Right"></Button>
+                <Button x:Name="btnSelect1" Content="Music" Click="btnSelect1_Click" HorizontalAlignment="Right"></Button>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

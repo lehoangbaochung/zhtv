@@ -5,90 +5,11 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- Thanh vote dọc -->
-            <Style x:Key="prbarRed" TargetType="ProgressBar">
-                <Setter Property="Foreground" Value="ForestGreen"></Setter>
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                <Setter Property="Height" Value="20"></Setter>
-                <Setter Property="Width" Value="177"></Setter>
-                <Setter Property="Margin" Value="15 0 15 0"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="VerticalAlignment" Value="Top"></Setter>
-                <Setter Property="Value" Value="10"></Setter>
-                <Setter Property="LayoutTransform">
-                    <Setter.Value>
-                        <RotateTransform Angle="270"></RotateTransform>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <!-- Ảnh bài hát -->
-            <Style x:Key="imgAlbum" TargetType="Image">
-                <Setter Property="Stretch" Value="Fill"></Setter>
-            </Style>
-            <!-- Mã bài hát -->
-            <Style x:Key="txtID" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="Yellow"></Setter>
-                <Setter Property="FontSize" Value="25"></Setter>
-
-                <Setter Property="FontWeight" Value="Bold"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-                <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            </Style>
-            <!-- Dòng chữ chạy ngang trên màn hình -->
-            <Style x:Key="txtRun" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="White"></Setter>
-                <Setter Property="Margin" Value="900 0 0 0"></Setter>
-                <Setter Property="FontSize" Value="20"></Setter>
-            </Style>
-            <!-- Control Template -->
-            <ControlTemplate x:Key="ProgressBarRed" TargetType="{x:Type ProgressBar}">
-                <Grid x:Name="TemplateRoot">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding Margin}" Background="{TemplateBinding Foreground}" Margin="80 0 0 0" CornerRadius="10"/>
-                    <Rectangle x:Name="PART_Track" />
-                    <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
-                        <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" RadiusX="10" RadiusY="10"/>
-                        <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5" RadiusX="10" RadiusY="10">
-                            <Rectangle.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform/>
-                                    <RotateTransform Angle="-90"/>
-                                    <TranslateTransform/>
-                                </TransformGroup>
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
-                    </Grid>
-                </Grid>
-            </ControlTemplate>
-            <!-- Thanh vote ngang -->
-            <Style x:Key="HozirontalProgressBar" TargetType="ProgressBar">
-                <Setter Property="Foreground" Value="Red"></Setter>
-                <Setter Property="Background" Value="Transparent"></Setter>
-                <Setter Property="BorderBrush" Value="Transparent"></Setter>
-                <Setter Property="Height" Value="20"></Setter>
-                <Setter Property="Width" Value="300"></Setter>
-                <Setter Property="Margin" Value="15 10 15 10"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-                <Setter Property="Value" Value="10"></Setter>
-            </Style>
-            <!-- Mã bài hát -->
-            <Style x:Key="HozirontalTextBlockSongID" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="Yellow"></Setter>
-                <Setter Property="FontSize" Value="25"></Setter>
-                <Setter Property="Margin" Value="15 -5 15 0"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Left"></Setter>
-                <Setter Property="VerticalAlignment" Value="Top"></Setter>
-                <Setter Property="TextTrimming" Value="WordEllipsis"></Setter>
-            </Style>
-            <Style x:Key="HorizontalTextBlockPlaylist" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="White"></Setter>
-                <Setter Property="Margin" Value="1000 0 0 10"></Setter>
-                <Setter Property="FontSize" Value="22"></Setter>
-                <Setter Property="VerticalAlignment" Value="Top"></Setter>
-                <Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
-            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ResourceDictionary/ChatRD.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="ResourceDictionary/MusicRD.xaml"></ResourceDictionary>
+                <ResourceDictionary Source="ResourceDictionary/MainRD.xaml"></ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
