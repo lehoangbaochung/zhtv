@@ -10,10 +10,11 @@ namespace ZHTV.Models
         public static Dictionary<int, Song> SongDict = Sheet.SongDict(Sheet.GetData("1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo", "A2:C"));
         static readonly string[] BannedUser = { "UCcsoaAFMYO9gOXDCjiB6fEw", "UCXiF7lSlg3tYTynabRiNURA"};
         static readonly Random rd = new Random();
+        static int count = 0;
 
         private static readonly int MinOrderSongNumber = 15; // Số bài hát tối thiểu ở hàng chờ
 
-        public static void FillNextSongs() // thêm bài hát mới sau khi phát xong một bài hát
+        public static Song FillNextSongs() // thêm bài hát mới sau khi phát xong một bài hát
         {
             if (Playlist.Count != 0) 
             {
@@ -27,22 +28,27 @@ namespace ZHTV.Models
                 if (!Playlist.Contains(song))
                     Playlist.Add(song);
             }
+
+            return Playlist[0];
         }
 
         public static void OrderMultipleSongs()
         {
-            new Youtube().Run("oJ5tiq4DBNY").Wait();
+            new Youtube().Run("aRqgwjJjQUs").Wait();
 
-            foreach (var item in Youtube.MessageList.Values)
+            if (Youtube.MessageList.Count > count)
             {
-                //if (!BannedUser.Contains(item.UserID))
-                    OrderSong(item);
+                for (int i = count; i < Youtube.MessageList.Count; i++)
+                {
+                    OrderSong(Youtube.MessageList.ElementAt(i).Value);
+                }
+                count = Youtube.MessageList.Count;
             }
         }
 
         private static void OrderSong(Order order)
         {
-            if (Playlist.Where(s => s.User.ContainsKey(order.UserID)).Count() < 3) // mỗi acc chỉ được vote tối đa 2 bài 1 lần
+            if (Playlist.Where(s => s.User.ContainsKey(order.UserID)).Count() < 3) // mỗi acc chỉ được vote tối đa 3 bài 1 lần
             {
                 var index = Playlist.FindIndex(s => s.ID == order.SongID);
 

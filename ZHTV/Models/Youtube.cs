@@ -8,6 +8,8 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Text;
 
 namespace ZHTV.Models
 {
@@ -48,16 +50,34 @@ namespace ZHTV.Models
                 }
             }
         }
-        
+
+        private string ConvertToUnSign(string text)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = text.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, string.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+        }
+
         private string TextTrimming(string text)
         {
-            var regexItem = new Regex("^ZM [1-9][0-9]*$");
+            var regexZM = new Regex("^ZM [1-9][0-9]*$");
+            var regexZMT = new Regex("^ZMT .+$");
             string substr = null;
 
-            if (regexItem.IsMatch(text) && Manage.SongDict.ContainsKey(Convert.ToInt32(text.Substring(3)))) // đảm bảo đúng cú pháp vote và tồn tại id trong list
+            if (regexZM.IsMatch(text) && Manage.SongDict.ContainsKey(Convert.ToInt32(text.Substring(3)))) // đảm bảo đúng cú pháp vote và tồn tại id trong list
             {
                 substr = text.Substring(3);
             }
+            else if (regexZMT.IsMatch(text))
+            {
+                foreach (var item in Manage.SongDict.Values)
+                {
+                    if ((ConvertToUnSign(item.Name).ToLower() + " " + ConvertToUnSign(item.Artist).ToLower()).Contains(ConvertToUnSign(text.Substring(4)).ToLower()))
+                        substr = item.ID.ToString();
+                    else if (ConvertToUnSign(item.Name).ToLower() == ConvertToUnSign(text.Substring(4)).ToLower())
+                        substr = item.ID.ToString();
+                }    
+            }    
             return substr;
         }   
     }

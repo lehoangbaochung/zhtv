@@ -10,27 +10,31 @@
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
+        <Grid.Resources>
+            <ImageBrush x:Key="PlayingSongBackgroundImg" ImageSource="D:\Youtube\Zither Harp TV\Background\Christmas\183-1833331_candy-cane-christmas-picture-frames-clip-art-christmas-removebg-preview.png"></ImageBrush>
+            <SolidColorBrush x:Key="brownBrush" Color="Blue"></SolidColorBrush>
+        </Grid.Resources>
         <!-- Trình phát nhạc -->
         <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
         <!-- Ảnh màn hình -->
         <Image x:Name="imgScreen" Source="D:\Youtube\Zither Harp TV\Background\QC1.png" Margin="10"></Image>
         <!-- Logo kênh -->
-        <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png" Margin="1150 50 10 0"
+        <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png" Margin="1100 40 10 0"
                 HorizontalAlignment="Right" VerticalAlignment="Top">
         </Image>
-        <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1080 10 120 500"
+        <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1100 10 140 520"
                 HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
         <TextBlock x:Name="txtTilte" Text="Trực tiếp" Foreground="Black"
                     FontSize="22" FontWeight="Bold"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="500 150 70 0">
+                    Margin="450 140 70 0">
         </TextBlock>
 
-        <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{StaticResource PlayingSongBackgroundImg}"></TextBlock>
         <TextBlock x:Name="txtInfo" Text="" FontSize="22" Margin="700 0 300 10" VerticalAlignment="Bottom"></TextBlock>
         <TextBlock x:Name="txtOrder" Text="" FontSize="22" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
-        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\33.jpg" Stretch="UniformToFill"></Image>
+        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\5.jpg" Stretch="UniformToFill"></Image>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -65,7 +69,7 @@
                         </Grid.RowDefinitions>
 
                         <ProgressBar x:Name="prbSong1" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
-                        <TextBlock Grid.Row="1" x:Name="txtSong1" Text="344: Hello" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
+                        <TextBlock Grid.Row="1" x:Name="txtSong1" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
 
                     <Grid Grid.Column="1">
@@ -75,7 +79,7 @@
                         </Grid.RowDefinitions>
 
                         <ProgressBar x:Name="prbSong2" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
-                        <TextBlock Grid.Row="1" x:Name="txtSong2" Text="123: Hello" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
+                        <TextBlock Grid.Row="1" x:Name="txtSong2" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
 
                     <Grid Grid.Column="2">
@@ -85,7 +89,7 @@
                         </Grid.RowDefinitions>
 
                         <ProgressBar x:Name="prbSong3" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
-                        <TextBlock Grid.Row="1" x:Name="txtSong3" Text="344: Hello" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
+                        <TextBlock Grid.Row="1" x:Name="txtSong3" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
                 </Grid>
             </Grid>

@@ -12,14 +12,12 @@ namespace ZHTV
     public partial class Chat : Window
     {
         readonly Random rd = new Random();
-        //static Song nextSong;
 
         public Chat()
         {
             InitializeComponent();
             Player.Source = new Uri(Display.SongURL(Manage.SongDict.ElementAt(rd.Next(1, Manage.SongDict.Count)).Value));
             Manage.FillNextSongs();
-            Manage.Playlist.RemoveAt(0);
             Interface();
             Timer();
         }

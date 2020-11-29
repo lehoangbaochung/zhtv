@@ -5,7 +5,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using ZHTV.Models;
 using ZHTV.Functions;
-using System.Linq;
 
 namespace ZHTV.Interface
 {
@@ -16,9 +15,9 @@ namespace ZHTV.Interface
         public Music()
         {
             InitializeComponent();
-            Player.Source = new Uri(Display.SongURL(Manage.SongDict.ElementAt(rd.Next(1, Manage.SongDict.Count)).Value));
+            Player.Source = new Uri(Display.SongURL(Manage.FillNextSongs()));
+            DisplayScreen();
             Manage.FillNextSongs();
-            Manage.Playlist.RemoveAt(0);
             Interface();
             Timer();
         }

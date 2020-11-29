@@ -62,7 +62,7 @@ namespace ZHTV.Functions
                 "Nếu các bạn yêu thích Zither Harp xin hãy ủng hộ cho kênh qua tài khoản ngân hàng Viettinbank với số tài khoản 108869372829",
                 "Để xem mã số của tất cả các bài hát vui lòng truy cập địa chỉ http://megaurl.in/cL4t",
                 "Mọi yêu cầu vietsub bài hát vui lòng điền thông tin của bài hát đó tại địa chỉ http://megaurl.in/MAGJkie",
-                "Để bình chọn cho ca khúc mình yêu thích vui lòng soạn tin theo cú pháp ZM mã_bài_hát hoặc ZMT tên_bài_hát gửi vào hộp thoại trò chuyện",
+                "Để bình chọn cho ca khúc mình yêu thích vui lòng soạn tin theo cú pháp ZM mã_bài_hát hoặc ZMT tên_bài_hát (tên_ca_sĩ) gửi vào hộp thoại trò chuyện",
                 "Kênh truyền hình âm nhạc tương tác trực tiếp dành cho giới trẻ ZHTV phát sóng đều đặn vào tối các ngày thứ 7 và chủ nhật hàng tuần. Kính mong các quý khán giả chú ý đón xem!",
                 "Để giao lưu, học hỏi, trao đổi kiến thức với mọi người và chia sẻ, thảo luận về các ca khúc các bạn có thể tham gia vào nhóm I & Zither Harp " +
                 "tại địa chỉ http://facebook.com/groups/zither.harp",
