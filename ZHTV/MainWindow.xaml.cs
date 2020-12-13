@@ -1,5 +1,9 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Navigation;
 using ZHTV.Interface;
+using ZHTV.Models;
 
 namespace ZHTV
 {
@@ -8,7 +12,13 @@ namespace ZHTV
         public MainWindow()
         {
             InitializeComponent();
-            Interface();
+            MyMediaElement.MediaFailed += MyMediaElement_MediaFailed;
+            MyMediaElement.LoadedBehavior = MediaState.Play;
+        }
+
+        void MyMediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            MessageBox.Show(e.ErrorException.Message);
         }
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
@@ -20,9 +30,7 @@ namespace ZHTV
 
         private void btnSelect1_Click(object sender, RoutedEventArgs e)
         {
-            Music m = new Music();
-            m.Show();
-            Hide();
+
         }
 
         private void Interface()
@@ -53,5 +61,10 @@ namespace ZHTV
                 Hide();
             }    
         }
+    }
+
+    public class LiveStream
+    {
+        public string VideoId { get; set; }
     }
 }

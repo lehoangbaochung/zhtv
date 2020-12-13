@@ -34,16 +34,33 @@
                                 <TextBlock Margin="5">Range</TextBlock>
                                 <TextBox x:Name="tbxSheetRange" Width="100" Margin="5">A2:C</TextBox>
                             </StackPanel>
-                            
                         </StackPanel>
                     </Grid>
                     <Grid Grid.Row="0" Grid.Column="1">
-                        
                     </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Security" />
-            <TabItem Header="Details" />
+            <TabItem Header="Details">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <GroupBox Header="Offline"/>
+                        <StackPanel Margin="20">
+                            <Label>Music folder:</Label>
+                            <Image Source="https://drive.google.com/file/d/1DY4wLPFzRcZY0-VrgNjCNjDvfyD6VGy_/view?usp=sharing"></Image>
+                            <TextBlock x:Name="musicFolderPath" Width="500" HorizontalAlignment="Left" ButtonBase.Click="btnSelect1_Click"></TextBlock>
+                        </StackPanel>
+                    </Grid>
+                    <MediaElement LoadedBehavior="Manual" x:Name="MyMediaElement" Margin="0,177,0,0" Grid.RowSpan="2"></MediaElement>
+                    <WebBrowser Source="https://drive.google.com/file/d/1J-STHUvzKPfGXT6riyD2FkqBkGOUCAvx/view?usp=sharing"></WebBrowser>
+
+                </Grid>
+            </TabItem>
         </TabControl>
         <!--<TabItem Header="Danh mục" Tag="/Images/Daily Activity/video_red.png" DataContext="/Images/Daily Activity/video_gray.png" Template="{DynamicResource tabItemTemplate}"></TabItem>-->
         <Grid Grid.Row="1">
@@ -66,7 +83,7 @@
                 <Button x:Name="btnStart" Margin="20" Content="Start" VerticalAlignment="Center" HorizontalAlignment="Stretch" Click="btnStart_Click"></Button>
             </StackPanel>
             <StackPanel>
-
+                
                 <Button x:Name="btnSelect" Content="Chat" Click="btnSelect_Click" HorizontalAlignment="Right"></Button>
                 <Button x:Name="btnSelect1" Content="Music" Click="btnSelect1_Click" HorizontalAlignment="Right"></Button>
             </StackPanel>

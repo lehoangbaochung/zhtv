@@ -50,7 +50,9 @@ namespace ZHTV.Models
                         { 
                             ID = Convert.ToInt32(row[0]), 
                             Name = row[1].ToString(), 
-                            Artist = row[2].ToString() 
+                            Artist = row[2].ToString(),
+                            AlbumUri = row[3].ToString(),
+                            ArtistUri = row[4].ToString()
                         });
                 }
             }

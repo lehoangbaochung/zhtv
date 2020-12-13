@@ -2,7 +2,6 @@
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
@@ -15,7 +14,8 @@ namespace ZHTV.Models
 {
     class Youtube
     {
-        public static readonly Dictionary<string, Order> MessageList = new Dictionary<string, Order>();
+        public static readonly Dictionary<string, Order> OrderList = new Dictionary<string, Order>();
+        private static int count = 0;
 
         public async Task Run(string videoId)
         {
@@ -39,15 +39,24 @@ namespace ZHTV.Models
             var liveChatMessageListResponse = liveChatMessageListRequest.Execute();
             foreach (var item in liveChatMessageListResponse.Items)
             {
-                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !MessageList.ContainsKey(item.Id))
+                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderList.ContainsKey(item.Id) && Manage.SongDict.ContainsKey(id))
                 {
-                    MessageList.Add(item.Id, new Order()
+                    OrderList.Add(item.Id, new Order()
                     {
                         UserID = item.AuthorDetails.ChannelId,
                         UserName = item.AuthorDetails.DisplayName,
                         SongID = id
                     });
                 }
+            }
+
+            if (OrderList.Count > count)
+            {
+                for (int i = count; i < OrderList.Count; i++)
+                {
+                    Manage.OrderSong(OrderList.ElementAt(i).Value);
+                }
+                count = OrderList.Count;
             }
         }
 
@@ -60,23 +69,23 @@ namespace ZHTV.Models
 
         private string TextTrimming(string text)
         {
-            var regexZM = new Regex("^ZM [1-9][0-9]*$");
-            var regexZMT = new Regex("^ZMT .+$");
+            var syntaxZM = new Regex("^ZM [1-9][0-9]*$");
+            var syntaxZMT = new Regex("^ZMT .+$");
             string substr = null;
 
-            if (regexZM.IsMatch(text) && Manage.SongDict.ContainsKey(Convert.ToInt32(text.Substring(3)))) // đảm bảo đúng cú pháp vote và tồn tại id trong list
+            if (syntaxZM.IsMatch(text))
             {
                 substr = text.Substring(3);
             }
-            else if (regexZMT.IsMatch(text))
+            else if (syntaxZMT.IsMatch(text))
             {
                 foreach (var item in Manage.SongDict.Values)
                 {
-                    if ((ConvertToUnSign(item.Name).ToLower() + " " + ConvertToUnSign(item.Artist).ToLower()).Contains(ConvertToUnSign(text.Substring(4)).ToLower()))
+                    if (string.Compare(item.Name, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();
-                    else if (ConvertToUnSign(item.Name).ToLower() == ConvertToUnSign(text.Substring(4)).ToLower())
+                    else if ((item.Name + " " + item.Artist).ToLower().Contains(text.Substring(4).ToLower()))
                         substr = item.ID.ToString();
-                }    
+                }
             }    
             return substr;
         }   

@@ -2,11 +2,13 @@
 
 namespace ZHTV.Models
 {
-    public class Song
+    class Song
     {
         public int ID { set; get; }
         public string Name { set; get; }
         public string Artist { set; get; }
+        public string AlbumUri { set; get; }
+        public string ArtistUri { set; get; }
         public Dictionary<string, string> User = new Dictionary<string, string>();
 
         // override object.Equals
@@ -18,7 +20,7 @@ namespace ZHTV.Models
             }
 
             Song song = (Song)obj;
-            return this.ID == song.ID;
+            return ID == song.ID;
         }
 
         // override object.GetHashCode

@@ -17,9 +17,9 @@
         <!-- Trình phát nhạc -->
         <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
         <!-- Ảnh màn hình -->
-        <Image x:Name="imgScreen" Source="D:\Youtube\Zither Harp TV\Background\QC1.png" Margin="10"></Image>
+        <Image x:Name="imgScreen" Margin="10"></Image>
         <!-- Logo kênh -->
-        <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png" Margin="1100 40 10 0"
+        <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png" Margin="1150 40 10 0"
                 HorizontalAlignment="Right" VerticalAlignment="Top">
         </Image>
         <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1100 10 140 520"
@@ -31,18 +31,18 @@
                     Margin="450 140 70 0">
         </TextBlock>
 
-        <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="{StaticResource PlayingSongBackgroundImg}"></TextBlock>
+        <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="White"></TextBlock>
         <TextBlock x:Name="txtInfo" Text="" FontSize="22" Margin="700 0 300 10" VerticalAlignment="Bottom"></TextBlock>
         <TextBlock x:Name="txtOrder" Text="" FontSize="22" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
-        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\5.jpg" Stretch="UniformToFill"></Image>
+        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\12.jpg" Stretch="UniformToFill"></Image>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.15*"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Button x:Name="btnLogo" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0" BorderBrush="Transparent" Click="btnLogo_Click">
+
+            <Button x:Name="btnLogo" Grid.Row="0" HorizontalAlignment="Stretch" Margin="0" BorderBrush="Transparent">
                 <Button.Background>
                     <ImageBrush ImageSource="D:\Code\C#\ZHTV\ZHTV\Images\Logo\Zither Harp-Logo.png" Stretch="Uniform"></ImageBrush>
                 </Button.Background>
@@ -68,7 +68,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <ProgressBar x:Name="prbSong1" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
+                        <ProgressBar x:Name="prbSong1" Style="{StaticResource ResourceKey=HorizontalProgressBar}"></ProgressBar>
                         <TextBlock Grid.Row="1" x:Name="txtSong1" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
 
@@ -78,7 +78,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <ProgressBar x:Name="prbSong2" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
+                        <ProgressBar x:Name="prbSong2" Style="{StaticResource ResourceKey=HorizontalProgressBar}"></ProgressBar>
                         <TextBlock Grid.Row="1" x:Name="txtSong2" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
 
@@ -88,7 +88,7 @@
                             <RowDefinition></RowDefinition>
                         </Grid.RowDefinitions>
 
-                        <ProgressBar x:Name="prbSong3" Style="{StaticResource ResourceKey=ProgressBar}"></ProgressBar>
+                        <ProgressBar x:Name="prbSong3" Style="{StaticResource ResourceKey=HorizontalProgressBar}"></ProgressBar>
                         <TextBlock Grid.Row="1" x:Name="txtSong3" Text="" Style="{StaticResource ResourceKey=TextBlockSongName}"></TextBlock>
                     </Grid>
                 </Grid>

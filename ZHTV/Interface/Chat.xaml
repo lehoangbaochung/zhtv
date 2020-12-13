@@ -37,8 +37,7 @@
             </TextBlock>
         </Grid>
         <!-- Khung hiển thị ảnh ca sĩ -->
-        <Image x:Name="imgScreen" Source="D:\Youtube\Zither Harp TV\Background\QC1.png"
-               Margin="20">
+        <Image x:Name="imgScreen" Margin="20">
         </Image>
         <!--<Image x:Name="imgFrame" Source="C:\Users\Asus\Downloads\istockphoto-1080953840-1024x1024-removebg-preview.png" Margin="0 0 0 0" Stretch="Fill"></Image>-->
         <TextBlock x:Name="txtNextSong" Text="" FontSize="20" Foreground="Black" Margin="180 0 200 20" TextTrimming="WordEllipsis" VerticalAlignment="Bottom"></TextBlock>
@@ -70,9 +69,9 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 1 -->
-                    <ProgressBar x:Name="prbar1" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img1" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\2.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"/>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt1" Text="2" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
+                    <ProgressBar x:Name="prbSong1" Style="{StaticResource VerticalProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="imgSong1" Grid.Column ="1" Style="{StaticResource ResourceKey=ImageAlbum}"/>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txtSong1" Text="2" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="1">
@@ -86,9 +85,9 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 2 -->
-                    <ProgressBar x:Name="prbar2" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img2" Grid.Column="1" Source="D:\Youtube\Zither Harp TV\Album\4.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt2" Text="4" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
+                    <ProgressBar x:Name="prbSong2" Style="{StaticResource VerticalProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="imgSong2" Grid.Column="1" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txtSong2" Text="4" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
 
                 <Grid Grid.Column="2">
@@ -102,13 +101,12 @@
                         <RowDefinition Height="0.25*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <!-- Bài hát 3 -->
-                    <ProgressBar x:Name="prbar3" Style="{StaticResource ResourceKey=ProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
-                    <Image x:Name="img3" Grid.Column ="1" Source="D:\Youtube\Zither Harp TV\Album\6.jpg" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
-                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txt3" Text="6" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
+                    <ProgressBar x:Name="prbSong3" Style="{StaticResource VerticalProgressBar}" Grid.ColumnSpan="2"></ProgressBar>
+                    <Image x:Name="imgSong3" Grid.Column ="1" Style="{StaticResource ResourceKey=ImageAlbum}"></Image>
+                    <TextBlock Grid.Column="1" Grid.Row="1" x:Name="txtSong3" Text="6" Style="{StaticResource ResourceKey=TextBlockSongID}"></TextBlock>
                 </Grid>
                 <!-- Button -->
-                <Button x:Name="btnSyntax" Grid.Column="7" Click="btnSyntax_Click"
-                        Width="180" Height="177" FontSize="25" VerticalAlignment="Top">
+                <Button x:Name="btnSyntax" Grid.Column="7" Width="180" Height="177" FontSize="25" VerticalAlignment="Top" BorderBrush="Transparent">
                     <Button.Background>
                         <ImageBrush ImageSource="D:\Code\C#\ZHTV\ZHTV\Images\Logo\Zither Harp-Logo.png" Stretch="Uniform"/>
                     </Button.Background>
