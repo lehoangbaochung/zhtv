@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Navigation;
+using ZHTV.Functions.Online;
 using ZHTV.Interface;
 using ZHTV.Models;
+using ZHTV.Models.Windows;
 
 namespace ZHTV
 {
@@ -12,8 +13,21 @@ namespace ZHTV
         public MainWindow()
         {
             InitializeComponent();
-            MyMediaElement.MediaFailed += MyMediaElement_MediaFailed;
-            MyMediaElement.LoadedBehavior = MediaState.Play;
+
+            MainWindowElement element = new MainWindowElement
+            {
+                VideoId = tbxVideoID.Text,
+                SheetId = tbxSheetID.Text,
+                SheetTab = tbxSheetTab.Text,
+                SheetRange = tbxSheetRange.Text,
+                MusicFolderPath = txtbMusicFolderPath.Text,
+                FormatMusicFile = txtbFormatFile.Text
+            };
+
+            Setting.SongDictionary(element);
+
+            //MyMediaElement.MediaFailed += MyMediaElement_MediaFailed;
+            //MyMediaElement.LoadedBehavior = MediaState.Play;
         }
 
         void MyMediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)

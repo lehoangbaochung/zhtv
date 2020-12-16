@@ -2,20 +2,22 @@
 using Google.Apis.Services;
 using Google.Apis.Util.Store;
 using Google.Apis.YouTube.v3;
-using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using System.Text;
+using ZHTV.Models.Objects;
+using System.Collections.Generic;
 
-namespace ZHTV.Models
+namespace ZHTV.Functions.Online
 {
     class Youtube
     {
-        public static readonly Dictionary<string, Order> OrderList = new Dictionary<string, Order>();
-        private static int count = 0;
+        static readonly Dictionary<string, Order> OrderDictionary = new Dictionary<string, Order>();
+        static string liveChatId = null;
+        static int count = 0;
 
         public async Task Run(string videoId)
         {
@@ -32,16 +34,23 @@ namespace ZHTV.Models
                 ApplicationName = GetType().ToString()
             });
 
-            var videoListRequest = youtubeService.Videos.List("liveStreamingDetails");
-            videoListRequest.Id = videoId;
-            var videoListResponse = videoListRequest.Execute();
-            var liveChatMessageListRequest = youtubeService.LiveChatMessages.List(videoListResponse.Items[0].LiveStreamingDetails.ActiveLiveChatId, "snippet,authorDetails");
+            if (liveChatId == null)
+            {
+                var videoListRequest = youtubeService.Videos.List("liveStreamingDetails");
+                videoListRequest.Id = videoId;
+
+                var videoListResponse = videoListRequest.Execute();
+                liveChatId = videoListResponse.Items[0].LiveStreamingDetails.ActiveLiveChatId;
+            }
+
+            var liveChatMessageListRequest = youtubeService.LiveChatMessages.List(liveChatId, "snippet,authorDetails");
             var liveChatMessageListResponse = liveChatMessageListRequest.Execute();
+
             foreach (var item in liveChatMessageListResponse.Items)
             {
-                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderList.ContainsKey(item.Id) && Manage.SongDict.ContainsKey(id))
+                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) && Sheet.SongDictionary.ContainsKey(id))
                 {
-                    OrderList.Add(item.Id, new Order()
+                    OrderDictionary.Add(item.Id, new Order()
                     {
                         UserID = item.AuthorDetails.ChannelId,
                         UserName = item.AuthorDetails.DisplayName,
@@ -50,13 +59,14 @@ namespace ZHTV.Models
                 }
             }
 
-            if (OrderList.Count > count)
+            if (OrderDictionary.Count > count)
             {
-                for (int i = count; i < OrderList.Count; i++)
+                for (int i = count; i < OrderDictionary.Count; i++)
                 {
-                    Manage.OrderSong(OrderList.ElementAt(i).Value);
+                    Manage.OrderSong(OrderDictionary.ElementAt(i).Value);
                 }
-                count = OrderList.Count;
+
+                count = OrderDictionary.Count;
             }
         }
 
@@ -79,14 +89,15 @@ namespace ZHTV.Models
             }
             else if (syntaxZMT.IsMatch(text))
             {
-                foreach (var item in Manage.SongDict.Values)
+                foreach (var item in Sheet.SongDictionary.Values)
                 {
                     if (string.Compare(item.Name, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();
                     else if ((item.Name + " " + item.Artist).ToLower().Contains(text.Substring(4).ToLower()))
                         substr = item.ID.ToString();
                 }
-            }    
+            } 
+            
             return substr;
         }   
     }

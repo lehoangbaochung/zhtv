@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using ZHTV.Models;
 using ZHTV.Functions;
+using ZHTV.Functions.Online;
+using ZHTV.Models.Windows;
 
 namespace ZHTV.Interface
 {
@@ -10,35 +12,28 @@ namespace ZHTV.Interface
         {
             InitializeComponent();
 
-            var screen = new Screen
+            var element = new InterfaceElement
             {
-                Image = imgScreen,
-                PlayingSongName = txtNextSong
-            };
-
-            var element = new Element
-            {
+                WindowName = Name,
                 Player = Player,
                 Info = txtInfo,
-                SyntaxOrder = txtOrder
-            };
-
-            var songBar = new MusicSongBar
-            {
+                Screen = imgScreen,
+                OrderText = txtOrder,
+                PlayingSongName = txtNextSong,
                 SongName1 = txtSong1,
                 SongName2 = txtSong2,
                 SongName3 = txtSong3,
                 SongOrderCount1 = prbSong1,
                 SongOrderCount2 = prbSong2,
                 SongOrderCount3 = prbSong3,
-                Playlist = txtPlaylist
+                Playlist = txtPlaylist,
             };
 
             Manage.FillNextSongs();
             Manage.Play(element);
-            Display.Screen(screen);
-            Display.MusicSongBar(songBar);
-            Timer.Music(element, screen, songBar);
+            Display.Screen(element);
+            Display.SongBar(element);
+            MusicTimer.Start(element);
         }   
     }
 }

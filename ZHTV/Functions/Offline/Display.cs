@@ -2,33 +2,36 @@
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
-using ZHTV.Models;
+using ZHTV.Functions.Online;
+using ZHTV.Models.Windows;
 
 namespace ZHTV.Functions
 {
-    class Display
+    class Display : DisplayElement
     {
         static readonly Random rd = new Random();
 
-        public static void Screen(Screen screen)
+        public static void Screen(InterfaceElement element)
         {
-            DisplayElement.ArtistImage(screen.Image);
-            DisplayElement.PlayingSongName(screen.PlayingSongName);
+            ArtistImage(element);
+            PlayingSongName(element);
         }
 
-        public static void MusicSongBar(MusicSongBar songBar)
+        public static void SongBar(InterfaceElement element)
         {
-            DisplayElement.SongName(songBar.SongName1, songBar.SongName2, songBar.SongName3);
-            DisplayElement.SongOrderCount(songBar.SongOrderCount1, songBar.SongOrderCount2, songBar.SongOrderCount3);
-            DisplayElement.Playlist(songBar.Playlist);
-        }
-
-        public static void ChatSongBar(ChatSongBar songBar)
-        {
-            DisplayElement.SongID(songBar.SongID1, songBar.SongID2, songBar.SongID3);
-            DisplayElement.SongOrderCount(songBar.SongOrderCount1, songBar.SongOrderCount2, songBar.SongOrderCount3);
-            DisplayElement.AlbumImage(songBar.SongImage1, songBar.SongImage2, songBar.SongImage3);
-            DisplayElement.Playlist(songBar.Playlist);
+            if (element.WindowName == "MusicUI")
+            {
+                SongName(element);
+                SongOrderCount(element);
+                Playlist(element);
+            }
+            else if (element.WindowName == "ChatUI")
+            {
+                SongID(element);
+                AlbumImage(element);
+                SongOrderCount(element);
+                Playlist(element);
+            }    
         }
 
         public static string[] Info()
@@ -49,52 +52,52 @@ namespace ZHTV.Functions
 
         public static string SyntaxOrder()
         {
-            return "Soạn tin: ZM " + Manage.SongDict.ElementAt(rd.Next(1, Manage.SongDict.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
+            return "Soạn tin: ZM " + Sheet.SongDictionary.ElementAt(rd.Next(1, Sheet.SongDictionary.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
         }
     }
 
     class DisplayElement
     {
-        public static void SongID(TextBlock txtb1, TextBlock txtb2, TextBlock txtb3)
+        protected static void SongID(InterfaceElement element)
         {
-            txtb1.Text = Manage.Playlist[0].ID.ToString();
-            txtb2.Text = Manage.Playlist[1].ID.ToString();
-            txtb3.Text = Manage.Playlist[2].ID.ToString();
+            element.SongID1.Text = Manage.Playlist[0].ID.ToString();
+            element.SongID2.Text = Manage.Playlist[1].ID.ToString();
+            element.SongID3.Text = Manage.Playlist[2].ID.ToString();
         }
 
-        public static void SongName(TextBlock txtb1, TextBlock txtb2, TextBlock txtb3)
+        protected static void SongName(InterfaceElement element)
         {
-            txtb1.Text = Manage.Playlist[0].ID + ": " + Manage.Playlist[0].Name;
-            txtb2.Text = Manage.Playlist[1].ID + ": " + Manage.Playlist[1].Name;
-            txtb3.Text = Manage.Playlist[2].ID + ": " + Manage.Playlist[2].Name;
+            element.SongName1.Text = Manage.Playlist[0].ID + ": " + Manage.Playlist[0].Name;
+            element.SongName2.Text = Manage.Playlist[1].ID + ": " + Manage.Playlist[1].Name;
+            element.SongName3.Text = Manage.Playlist[2].ID + ": " + Manage.Playlist[2].Name;
         }
 
-        public static void SongOrderCount(ProgressBar prb1, ProgressBar prb2, ProgressBar prb3)
+        protected static void SongOrderCount(InterfaceElement element)
         {
-            prb1.Value = Manage.Playlist[0].User.Count * 10 + 10;
-            prb2.Value = Manage.Playlist[1].User.Count * 10 + 10;
-            prb3.Value = Manage.Playlist[2].User.Count * 10 + 10;
+            element.SongOrderCount1.Value = Manage.Playlist[0].User.Count * 10 + 10;
+            element.SongOrderCount2.Value = Manage.Playlist[1].User.Count * 10 + 10;
+            element.SongOrderCount3.Value = Manage.Playlist[2].User.Count * 10 + 10;
         }
 
-        public static void Playlist(TextBlock txtb)
+        protected static void Playlist(InterfaceElement element)
         {
-            txtb.Text = null;
+            element.Playlist.Text = null;
 
             for (int i = 0; i < 15; i++)
-                txtb.Text += Manage.Playlist[i].ID + ": " + Manage.Playlist[i].Name + " ";
+                element.Playlist.Text += Manage.Playlist[i].ID + ": " + Manage.Playlist[i].Name + " ";
         }
 
-        public static void PlayingSongName(TextBlock txtb)
+        public static void PlayingSongName(InterfaceElement element)
         {
             if (Manage.Playlist[0].User.Count == 0)
-                txtb.Text = " Bài đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist
-               + " \n Mã số: " + Manage.Playlist[0].ID;
+                element.PlayingSongName.Text = " Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist 
+                + " \n Mã số: " + Manage.Playlist[0].ID + " ";
             else
-                txtb.Text = " Khán giả yêu cầu nhiều nhất: " + Manage.Playlist[0].User.ElementAt(Manage.Playlist[0].User.Count - 1).Value
-               + " \n Bài đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID;
+                element.PlayingSongName.Text = " Khán giả yêu cầu nhiều nhất: " + Manage.Playlist[0].User.ElementAt(Manage.Playlist[0].User.Count - 1).Value
+                + " \n Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID + " ";
         }
 
-        public static void ArtistImage(Image img)
+        public static void ArtistImage(InterfaceElement element)
         {
             var bi = new BitmapImage();
 
@@ -103,19 +106,20 @@ namespace ZHTV.Functions
             try
             {      
                 bi.UriSource = new Uri(Manage.Playlist[0].ArtistUri);
+                bi.EndInit();
             }
             catch (Exception)
             {
                 bi.UriSource = new Uri(@"D:\Code\C#\ZHTV\ZHTV\Images\Background\ZHTV.png");
+                bi.EndInit();
             }
-            bi.EndInit();
 
-            img.Source = bi;
+            element.Screen.Source = bi;
         }
 
-        public static void AlbumImage(Image img1, Image img2, Image img3)
+        protected static void AlbumImage(InterfaceElement element)
         {
-            var albumImage = new Image[3] { img1, img2, img3 };
+            var albumImage = new Image[3] { element.SongImage1, element.SongImage2, element.SongImage3 };
             var bi = new BitmapImage();
 
             for (int i = 0; i < 3; i++)
@@ -125,12 +129,13 @@ namespace ZHTV.Functions
                 try
                 {
                     bi.UriSource = new Uri(Manage.Playlist[i].AlbumUri);
+                    bi.EndInit();
                 }
                 catch (Exception)
                 {
                     bi.UriSource = new Uri(@"D:\Code\C#\ZHTV\ZHTV\Images\Background\zh-music-project.jpg");
+                    bi.EndInit();
                 }
-                bi.EndInit();
 
                 albumImage[i].Source = bi;
             }

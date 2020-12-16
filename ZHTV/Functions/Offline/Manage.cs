@@ -1,21 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using ZHTV.Models.Windows;
+using ZHTV.Models.Objects;
+using System.Collections.Generic;
 
-namespace ZHTV.Models
+namespace ZHTV.Functions.Online
 {
     class Manage
     {
-        public static List<Song> Playlist = new List<Song>();
-        public static Dictionary<int, Song> SongDict = Sheet.SongDict(Sheet.GetData("1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo", "Vietnamese!A2:E"));
-        private static readonly string[] BannedUser = { "UCcsoaAFMYO9gOXDCjiB6fEw", "UCXiF7lSlg3tYTynabRiNURA"};
         static readonly Random rd = new Random();
+        static readonly int MinOrderSongNumber = 15;
+        public static readonly List<Song> Playlist = new List<Song>();
 
-        private static readonly int MinOrderSongNumber = 15;
-
-        public static void Play(Element element)
+        public static void Play(InterfaceElement element)
         {
-            element.Player.Source = new Uri(@"D:\Youtube\Zither Harp TV\Music\" + Playlist[0].ID + ".mp3"); 
+            element.Player.Source = new Uri(@"D:\Youtube\Zither Harp TV\Music\" + Playlist[0].ID + ".mp3");
         }
 
         public static void FillNextSongs()
@@ -28,7 +27,7 @@ namespace ZHTV.Models
 
             while (Playlist.Count < MinOrderSongNumber)
             {
-                var song = SongDict.ElementAt(rd.Next(1, SongDict.Count)).Value;
+                var song = Sheet.SongDictionary.ElementAt(rd.Next(1, Sheet.SongDictionary.Count)).Value;
                 if (!Playlist.Contains(song))
                     Playlist.Add(song);
             }
@@ -42,7 +41,7 @@ namespace ZHTV.Models
 
                 if (index == -1) // Bài hát chưa được order, thêm vào list
                 {
-                    var song = SongDict[order.SongID];
+                    var song = Sheet.SongDictionary[order.SongID];
                     Sort(song, order);
                 }
                 else // nếu ng dùng vote bài đã có trong list

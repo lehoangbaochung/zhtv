@@ -104,6 +104,7 @@
     </Compile>
     <Compile Include="Functions\Offline\Display.cs" />
     <Compile Include="Functions\Offline\Timer.cs" />
+    <Compile Include="Functions\Online\Setting.cs" />
     <Compile Include="Interface\Music.xaml.cs">
       <DependentUpon>Music.xaml</DependentUpon>
     </Compile>
@@ -137,11 +138,12 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Element.cs" />
+    <Compile Include="Models\Windows\InterfaceElement.cs" />
     <Compile Include="Functions\Online\Sheet.cs" />
     <Compile Include="Functions\Offline\Manage.cs" />
-    <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\Song.cs" />
+    <Compile Include="Models\Windows\MainWindowElement.cs" />
+    <Compile Include="Models\Objects\Order.cs" />
+    <Compile Include="Models\Objects\Song.cs" />
     <Compile Include="Functions\Online\Youtube.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

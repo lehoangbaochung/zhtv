@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ZHTV.Models
+namespace ZHTV.Models.Objects
 {
     class Song
     {

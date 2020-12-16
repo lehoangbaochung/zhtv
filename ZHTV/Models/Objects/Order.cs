@@ -1,4 +1,4 @@
-﻿namespace ZHTV.Models
+﻿namespace ZHTV.Models.Objects
 {
     class Order
     {

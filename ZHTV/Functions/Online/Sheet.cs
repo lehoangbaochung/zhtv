@@ -7,17 +7,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using ZHTV.Models.Objects;
 
-namespace ZHTV.Models
+namespace ZHTV.Functions.Online
 {
     class Sheet
     {
         static readonly string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
         static readonly string ApplicationName = "Google SpeadSheet";
-        static readonly Dictionary<int, Song> Song = new Dictionary<int, Song>();
-        static IList<IList<object>> values;
 
-        public static IList<IList<object>> GetData(string id, string range)
+        public static readonly Dictionary<int, Song> SongDictionary = new Dictionary<int, Song>();
+
+        public static IList<IList<object>> Get(string id, string range)
         {
             UserCredential credential;
             using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
@@ -35,18 +36,18 @@ namespace ZHTV.Models
 
             SpreadsheetsResource.ValuesResource.GetRequest request = service.Spreadsheets.Values.Get(id, range);
             ValueRange response = request.Execute();
-            values = response.Values;
+            IList<IList<object>> values = response.Values;
             return values;
         }
 
-        public static Dictionary<int, Song> SongDict(IList<IList<object>> values)
+        public static void Bind(IList<IList<object>> values)
         {
             if (values != null && values.Count > 0)
             {
                 foreach (var row in values)
                 {
-                    if (!Song.ContainsKey(Convert.ToInt32(row[0])))
-                        Song.Add(Convert.ToInt32(row[0]), new Song 
+                    if (!SongDictionary.ContainsKey(Convert.ToInt32(row[0])))
+                        SongDictionary.Add(Convert.ToInt32(row[0]), new Song 
                         { 
                             ID = Convert.ToInt32(row[0]), 
                             Name = row[1].ToString(), 
@@ -56,7 +57,6 @@ namespace ZHTV.Models
                         });
                 }
             }
-            return Song;
         }
     }
 }
