@@ -50,7 +50,6 @@
                         <GroupBox Header="Offline"/>
                         <StackPanel Margin="20">
                             <Label>Music folder:</Label>
-                            <DocumentViewer Background="Aqua" Height="100" Width="100"/>
                             <TextBlock x:Name="musicFolderPath" Width="500" HorizontalAlignment="Left"></TextBlock>
                         </StackPanel>
                     </Grid>
