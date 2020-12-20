@@ -34,7 +34,7 @@
         <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="White"></TextBlock>
         <TextBlock x:Name="txtInfo" Text="" FontSize="22" Margin="700 0 300 10" VerticalAlignment="Bottom"></TextBlock>
         <TextBlock x:Name="txtOrder" Text="" FontSize="22" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
-        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\12.jpg" Stretch="UniformToFill"></Image>
+        <Image Grid.Row="1" Source="D:\Youtube\Zither Harp TV\Background\Christmas\3.jpg" Stretch="UniformToFill"></Image>
 
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>

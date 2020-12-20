@@ -97,13 +97,10 @@ namespace ZHTV.Functions
             {
                 try
                 {
-                    new Youtube().Run(main.VideoId).Wait();
+                    Youtube.Order(main.VideoId);
                     Display.SongBar(element);
                 }
-                catch (Exception)
-                {
-                    timer.Stop();
-                }
+                catch (Exception) { timer.Stop(); }
             };
 
             timer.Start();

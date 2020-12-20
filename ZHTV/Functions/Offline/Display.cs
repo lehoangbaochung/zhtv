@@ -37,7 +37,9 @@ namespace ZHTV.Functions
         public static string[] Info()
         {
             string[] info = { "Mọi thông tin đóng góp và ý kiến vui lòng gửi tin nhắn về trang facebook của kênh Zither Harp tại địa chỉ: http://m.me/zither.harp",
-                "Nếu các bạn yêu thích Zither Harp xin hãy ủng hộ cho kênh qua tài khoản ngân hàng Viettinbank với số tài khoản 108869372829",
+                "Nếu các bạn yêu thích kênh truyền hình Zither Harp TV cũng như kênh chủ quản Zither Harp, xin hãy ủng hộ cho kênh qua ngân hàng Viettinbank với số " +
+                "tài khoản 108869372829 hoặc qua ví điện tử Momo theo địa chỉ https://nhantien.momo.vn/ZcN87ztbwTG. Sự đóng góp của bạn sẽ góp phần cho kênh " +
+                "có thể tiếp tục duy trì hoạt động trong tương lai. Xin chân thành cảm ơn!",
                 "Để xem mã số của tất cả các bài hát vui lòng truy cập địa chỉ http://megaurl.in/cL4t",
                 "Mọi yêu cầu vietsub bài hát vui lòng điền thông tin của bài hát đó tại địa chỉ http://megaurl.in/requestsong",
                 "Để bình chọn cho ca khúc mình yêu thích vui lòng soạn tin theo cú pháp ZM mã_bài_hát hoặc ZMT tên_bài_hát (tên_ca_sĩ) gửi vào hộp thoại trò chuyện",
@@ -47,12 +49,13 @@ namespace ZHTV.Functions
                 "Từ ngày 1/11/2020, địa chỉ liên kết tải nhạc sẽ được để phía dưới phần bình luận của mỗi video được đăng tải (bình luận đã được ghim)",
                 "Trước khi xem bất kỳ video vietsub nào trên kênh này hãy chắc chắn rằng phụ đề CC (phụ đề rời của Youtube) đã được bật 👌",
                 "Từ ngày 9/9/2020, kênh ZHTV chính thức chuyển phát sóng từ kênh Zither Harp sang kênh Zither Harp TV trên hạ tầng của Youtube" };
+
             return info;
         }
 
         public static string SyntaxOrder()
         {
-            return "Soạn tin: ZM " + Sheet.SongDictionary.ElementAt(rd.Next(1, Sheet.SongDictionary.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
+            return "Soạn tin: ZM " + Manage.SongDictionary.ElementAt(rd.Next(1, Manage.SongDictionary.Keys.Count)).Key + " gửi 6" + rd.Next(1, 7) + "77";
         }
     }
 
@@ -83,11 +86,10 @@ namespace ZHTV.Functions
         {
             element.Playlist.Text = null;
 
-            for (int i = 0; i < 15; i++)
-                element.Playlist.Text += Manage.Playlist[i].ID + ": " + Manage.Playlist[i].Name + " ";
+            for (int i = 0; i < 15; i++) element.Playlist.Text += Manage.Playlist[i].ID + ": " + Manage.Playlist[i].Name + " ";
         }
 
-        public static void PlayingSongName(InterfaceElement element)
+        protected static void PlayingSongName(InterfaceElement element)
         {
             if (Manage.Playlist[0].User.Count == 0)
                 element.PlayingSongName.Text = " Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist 
@@ -97,7 +99,7 @@ namespace ZHTV.Functions
                 + " \n Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID + " ";
         }
 
-        public static void ArtistImage(InterfaceElement element)
+        protected static void ArtistImage(InterfaceElement element)
         {
             var bi = new BitmapImage();
 

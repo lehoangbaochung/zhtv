@@ -11,12 +11,11 @@ namespace ZHTV.Functions.Online
 {
     class Setting
     {
-        public static void SongDictionary(MainWindowElement element)
+        public static Dictionary<int, Song> SongDict = new Dictionary<int, Song>();
+
+        public static void Start()
         {
-            if (element.SheetTab == null)
-                Sheet.Bind(Sheet.Get(element.SheetId, element.SheetRange));
-            else
-                Sheet.Bind(Sheet.Get(element.SheetId, element.SheetTab + "!" + element.SheetRange));
+            
         }
 
         public static string MusicFolderPath(Song song)

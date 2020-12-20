@@ -10,16 +10,18 @@ using System.Linq;
 using System.Text;
 using ZHTV.Models.Objects;
 using System.Collections.Generic;
+using Google.Apis.YouTube.v3.Data;
 
 namespace ZHTV.Functions.Online
 {
     class Youtube
     {
         static readonly Dictionary<string, Order> OrderDictionary = new Dictionary<string, Order>();
+        static YouTubeService youtubeService;
         static string liveChatId = null;
         static int count = 0;
 
-        public async Task Run(string videoId)
+        private async Task Run()
         {
             UserCredential credential;
             using (var stream = new FileStream("client_secrets.json", FileMode.Open, FileAccess.Read))
@@ -28,11 +30,16 @@ namespace ZHTV.Functions.Online
                     new[] { YouTubeService.Scope.Youtube }, "user", CancellationToken.None, new FileDataStore(GetType().ToString()));
             }
 
-            var youtubeService = new YouTubeService(new BaseClientService.Initializer()
+            youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = credential,
                 ApplicationName = GetType().ToString()
             });
+        }
+
+        private static LiveChatMessageListResponse MessageListResponse(string videoId, string part)
+        {
+            if (youtubeService == null) new Youtube().Run().Wait();
 
             if (liveChatId == null)
             {
@@ -43,12 +50,16 @@ namespace ZHTV.Functions.Online
                 liveChatId = videoListResponse.Items[0].LiveStreamingDetails.ActiveLiveChatId;
             }
 
-            var liveChatMessageListRequest = youtubeService.LiveChatMessages.List(liveChatId, "snippet,authorDetails");
-            var liveChatMessageListResponse = liveChatMessageListRequest.Execute();
+            var liveChatMessageListRequest = youtubeService.LiveChatMessages.List(liveChatId, part);
 
-            foreach (var item in liveChatMessageListResponse.Items)
+            return liveChatMessageListRequest.Execute();
+        }
+
+        public static void Order(string videoId)
+        { 
+            foreach (var item in MessageListResponse(videoId, "snippet,authorDetails").Items)
             {
-                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) && Sheet.SongDictionary.ContainsKey(id))
+                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) && Manage.SongDictionary.ContainsKey(id))
                 {
                     OrderDictionary.Add(item.Id, new Order()
                     {
@@ -61,10 +72,7 @@ namespace ZHTV.Functions.Online
 
             if (OrderDictionary.Count > count)
             {
-                for (int i = count; i < OrderDictionary.Count; i++)
-                {
-                    Manage.OrderSong(OrderDictionary.ElementAt(i).Value);
-                }
+                for (int i = count; i < OrderDictionary.Count; i++) Manage.OrderSong(OrderDictionary.ElementAt(i).Value);
 
                 count = OrderDictionary.Count;
             }
@@ -77,19 +85,17 @@ namespace ZHTV.Functions.Online
             return regex.Replace(temp, string.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
         }
 
-        private string TextTrimming(string text)
+        private static string TextTrimming(string text)
         {
             var syntaxZM = new Regex("^ZM [1-9][0-9]*$");
             var syntaxZMT = new Regex("^ZMT .+$");
             string substr = null;
 
-            if (syntaxZM.IsMatch(text))
-            {
-                substr = text.Substring(3);
-            }
+            if (syntaxZM.IsMatch(text)) substr = text.Substring(3);
+
             else if (syntaxZMT.IsMatch(text))
             {
-                foreach (var item in Sheet.SongDictionary.Values)
+                foreach (var item in Manage.SongDictionary.Values)
                 {
                     if (string.Compare(item.Name, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();

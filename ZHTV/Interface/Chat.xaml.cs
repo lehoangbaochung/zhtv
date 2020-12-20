@@ -30,7 +30,6 @@ namespace ZHTV
                 Playlist = txtPlaylist
             };
 
-            Manage.FillNextSongs();
             Manage.Play(element);
             Display.Screen(element);
             Display.SongBar(element);
