@@ -28,7 +28,7 @@ namespace ZHTV.Interface
                 SongOrderCount3 = prbSong3,
                 Playlist = txtPlaylist,
             };
-            //
+
             Manage.Play(element);
             Display.Screen(element);
             Display.SongBar(element);
