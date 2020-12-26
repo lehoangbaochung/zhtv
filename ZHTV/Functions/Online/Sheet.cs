@@ -17,9 +17,10 @@ namespace ZHTV.Functions.Online
         static readonly string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
         static readonly string ApplicationName = "Google SpeadSheet";
 
-        private static SheetsService Load()
+        public static IList<IList<object>> GetValue(MainWindowElement element)
         {
             UserCredential credential;
+
             using (var stream = new FileStream("credentials.json", FileMode.Open, FileAccess.Read))
             {
                 string credPath = "token.json";
@@ -33,15 +34,10 @@ namespace ZHTV.Functions.Online
                 ApplicationName = ApplicationName
             });
 
-            return service;
-        }
-
-        public static IList<IList<object>> Get(MainWindowElement element)
-        {
             SpreadsheetsResource.ValuesResource.GetRequest request;
 
-            if (element.SheetTab == null) request = Load().Spreadsheets.Values.Get(element.SheetId, element.SheetRange);
-            else request = Load().Spreadsheets.Values.Get(element.SheetId, element.SheetTab + "!" + element.SheetRange);
+            if (element.SheetTab == null) request = service.Spreadsheets.Values.Get(element.SheetId, element.SheetRange);
+            else request = service.Spreadsheets.Values.Get(element.SheetId, element.SheetTab + "!" + element.SheetRange);
 
             ValueRange response = request.Execute();
             IList<IList<object>> values = response.Values;
@@ -49,23 +45,51 @@ namespace ZHTV.Functions.Online
             return values;
         }
 
-        public static void Bind(IList<IList<object>> values)
+        private static void Song(IList<IList<object>> values)
         {
             if (values != null && values.Count > 0)
             {
                 foreach (var row in values)
                 {
-                    if (!Manage.SongDictionary.ContainsKey(Convert.ToInt32(row[0])))
-                        Manage.SongDictionary.Add(Convert.ToInt32(row[0]), new Song 
-                        { 
-                            ID = Convert.ToInt32(row[0]), 
-                            Name = row[1].ToString(), 
-                            Artist = row[2].ToString(),
-                            AlbumUri = row[3].ToString(),
-                            ArtistUri = row[4].ToString()
-                        });
+                    Manage.Songlist.Add(new Song 
+                    { 
+                        ID = Convert.ToInt32(row[0]), 
+                        Name = row[1].ToString(), 
+                        Artist = row[2].ToString(),
+                        AlbumUri = row[3].ToString(),
+                        ArtistUri = row[4].ToString()
+                    });
                 }
             }
+        }
+
+        private static void Theme(IList<IList<object>> values)
+        {
+            if (values != null && values.Count > 0)
+            {
+                foreach (var row in values)
+                {
+                    Display.ThemeList.Add(new Theme
+                    {
+                        Name = row[0].ToString(),
+                        OrderCount = row[2].ToString(),
+                        Song = row[3].ToString(),
+                        Playlist = row[4].ToString()
+                    });
+                }
+            }
+        }
+
+        private static void Info(IList<IList<object>> values)
+        {
+            if (values != null && values.Count > 0) foreach (var row in values) Display.InfoList.Add(row[1].ToString());
+        }
+
+        public static void Bind(MainWindowElement element)
+        {
+            Song(GetValue(element));
+            Info(GetValue(element));
+            Theme(GetValue(element));
         }
     }
 }

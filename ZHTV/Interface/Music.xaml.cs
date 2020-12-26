@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using ZHTV.Models;
 using ZHTV.Functions;
 using ZHTV.Functions.Online;
 using ZHTV.Models.Windows;
@@ -15,6 +14,7 @@ namespace ZHTV.Interface
             var element = new InterfaceElement
             {
                 WindowName = Name,
+                //Background = imgSongBar,
                 Player = Player,
                 Info = txtInfo,
                 Screen = imgScreen,
@@ -33,6 +33,12 @@ namespace ZHTV.Interface
             Display.Screen(element);
             Display.SongBar(element);
             MusicTimer.Start(element);
-        }   
+        }
+
+        private void btnLogo_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new MainWindow();
+            window.Show();
+        }
     }
 }

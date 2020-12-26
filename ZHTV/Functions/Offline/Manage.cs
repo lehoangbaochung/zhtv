@@ -11,7 +11,7 @@ namespace ZHTV.Functions.Online
         static readonly Random rd = new Random();
         static readonly int MinOrderSongNumber = 15;
         public static readonly List<Song> Playlist = new List<Song>();
-        public static readonly Dictionary<int, Song> SongDictionary = new Dictionary<int, Song>();
+        public static readonly List<Song> Songlist = new List<Song>();
 
         public static void Play(InterfaceElement element)
         {
@@ -23,12 +23,13 @@ namespace ZHTV.Functions.Online
             if (Playlist.Count != 0)
             {
                 Playlist[0].User.Clear();
+                Playlist[0].Code = -1;
                 Playlist.RemoveAt(0);
             }
 
             while (Playlist.Count < MinOrderSongNumber)
             {
-                var song = SongDictionary.ElementAt(rd.Next(1, SongDictionary.Count)).Value;
+                var song = Songlist[rd.Next(0, Songlist.Count - 1)];
 
                 if (!Playlist.Contains(song)) Playlist.Add(song);
             }
@@ -42,7 +43,7 @@ namespace ZHTV.Functions.Online
 
                 if (index == -1) // Bài hát chưa được order, thêm vào list
                 {
-                    var song = SongDictionary[order.SongID];
+                    var song = Songlist.Find(s => s.ID == order.SongID);
 
                     Sort(song, order);
                 }
@@ -52,12 +53,16 @@ namespace ZHTV.Functions.Online
 
                     if (!song.User.ContainsKey(order.UserID)) Sort(song, order);
                 }
-            }       
+            }   
         }
 
         private static void Sort(Song song, Order order)
         {
             song.User.Add(order.UserID, order.UserName);
+            song.Code = order.Code;
+
+            // if (order.UserID == "UCux2CF0xv1BgErYwysx-NyA") song.User.Add("ClownLord", order.UserName);
+
             var newSong = song;
             Playlist.Remove(song);
 

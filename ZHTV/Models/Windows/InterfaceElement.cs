@@ -1,4 +1,5 @@
 ﻿using System.Windows.Controls;
+using Microsoft.Web.WebView2.Core;
 
 namespace ZHTV.Models.Windows
 {
@@ -6,6 +7,8 @@ namespace ZHTV.Models.Windows
     {
         public string WindowName { set; get; }
         public MediaElement Player { set; get; }
+        public CoreWebView2 WebView { set; get; }
+        public Image Background { get; set; }
         public Image Screen { set; get; }
         public Image SongImage1 { set; get; }
         public Image SongImage2 { set; get; }
@@ -23,6 +26,6 @@ namespace ZHTV.Models.Windows
         public TextBlock Info { set; get; }
         public TextBlock Playlist { set; get; }
         public TextBlock OrderText { set; get; }
-        public Button OrderButton { set; get; }
+        public Button OrderButton { set; get; }       
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Windows;
+using System.Windows.Controls;
 using ZHTV.Functions.Online;
 using ZHTV.Interface;
 using ZHTV.Models.Windows;
@@ -36,12 +38,10 @@ namespace ZHTV
                 VideoId = tbxVideoID.Text,
                 SheetId = tbxSheetID.Text,
                 SheetTab = tbxSheetTab.Text,
-                SheetRange = tbxSheetRange.Text,
-                MusicFolderPath = txtbMusicFolderPath.Text,
-                FormatMusicFile = txtbFormatFile.Text
+                SheetRange = tbxSheetRange.Text
             };
 
-            Sheet.Bind(Sheet.Get(element));
+            Sheet.Bind(element);
             Manage.FillNextSongs();
 
             if (cbInterface.SelectedIndex == 0)

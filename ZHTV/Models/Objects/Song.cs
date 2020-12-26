@@ -9,6 +9,7 @@ namespace ZHTV.Models.Objects
         public string Artist { set; get; }
         public string AlbumUri { set; get; }
         public string ArtistUri { set; get; }
+        public int Code { set; get; }
         public Dictionary<string, string> User = new Dictionary<string, string>();
 
         // override object.Equals

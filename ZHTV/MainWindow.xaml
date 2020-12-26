@@ -14,28 +14,18 @@
         <TabControl TabStripPlacement="Left">
             <TabItem Header="Stream">
                 <Grid>
-                    <GroupBox Header="Settings"/>
-                    <StackPanel Margin="20" Grid.Row="0" Grid.Column="0">
-                        <Label Content="_ID livestream:" ></Label>
-                        <TextBox x:Name="tbxVideoID" HorizontalAlignment="Stretch"></TextBox>
+                    <StackPanel Margin="0" Grid.Row="0" Grid.Column="0">
+                        <Label Content="_ID livestream:" Margin="5"></Label>
+                        <TextBox x:Name="tbxVideoID" Margin="5" HorizontalAlignment="Stretch"></TextBox>
                         <Label Content="_Sheet:" ></Label>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <TextBlock Margin="5">ID</TextBlock>
-                            <TextBox x:Name="tbxSheetID" Width="300" Margin="0 5 5 5">1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo</TextBox>
-                            <TextBlock Margin="5">Tab page</TextBlock>
-                            <TextBox x:Name="tbxSheetTab" Width="100" Margin="5">Vietnamese</TextBox>
-                            <TextBlock Margin="5">Range</TextBlock>
-                            <TextBox x:Name="tbxSheetRange" Width="100" Margin="5">A2:E</TextBox>
-                        </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
-                            <Label Content="_Music folder:" ></Label>
-                            <TextBox x:Name="txtbMusicFolderPath" Margin="0 5 5 5" HorizontalAlignment="Stretch" Width="400">D:\Youtube\Zither Harp TV\Music</TextBox>
-                            <TextBlock Margin="5">Format file:</TextBlock>
-                            <TextBox x:Name="txtbFormatFile" Margin="0 5 5 5" HorizontalAlignment="Stretch">mp3</TextBox>
-                        </StackPanel>
-                        
+                        <TextBox x:Name="tbxSheetID" Margin="0 5 5 5">1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo</TextBox>
+                        <TextBlock Margin="5">Page</TextBlock>
+                        <TextBox x:Name="tbxSheetTab" Margin="5">Vietnamese</TextBox>
+                        <TextBlock Margin="5">Range</TextBlock>
+                        <TextBox x:Name="tbxSheetRange" Margin="5">A2:E</TextBox>
+
                     </StackPanel>
+
                 </Grid>
             </TabItem>
             <TabItem Header="Security" />
@@ -50,7 +40,6 @@
                         <GroupBox Header="Offline"/>
                         <StackPanel Margin="20">
                             <Label>Music folder:</Label>
-                            <DocumentViewer Background="Aqua" Height="100" Width="100"/>
                             <TextBlock x:Name="musicFolderPath" Width="500" HorizontalAlignment="Left"></TextBlock>
                         </StackPanel>
                     </Grid>

@@ -7,16 +7,17 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
-using System.Text;
 using ZHTV.Models.Objects;
 using System.Collections.Generic;
 using Google.Apis.YouTube.v3.Data;
+using System;
 
 namespace ZHTV.Functions.Online
 {
     class Youtube
     {
         static readonly Dictionary<string, Order> OrderDictionary = new Dictionary<string, Order>();
+        static readonly Random rd = new Random();
         static YouTubeService youtubeService;
         static string liveChatId = null;
         static int count = 0;
@@ -37,7 +38,7 @@ namespace ZHTV.Functions.Online
             });
         }
 
-        private static LiveChatMessageListResponse MessageListResponse(string videoId, string part)
+        private static LiveChatMessageListResponse MessageList(string videoId, string part)
         {
             if (youtubeService == null) new Youtube().Run().Wait();
 
@@ -57,15 +58,29 @@ namespace ZHTV.Functions.Online
 
         public static void Order(string videoId)
         { 
-            foreach (var item in MessageListResponse(videoId, "snippet,authorDetails").Items)
+            foreach (var item in MessageList(videoId, "snippet,authorDetails").Items)
             {
-                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) && Manage.SongDictionary.ContainsKey(id))
+                if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) 
+                    && Manage.Songlist.Find(s => s.ID == id) != null)
                 {
                     OrderDictionary.Add(item.Id, new Order()
                     {
                         UserID = item.AuthorDetails.ChannelId,
                         UserName = item.AuthorDetails.DisplayName,
-                        SongID = id
+                        SongID = id,
+                        Code = 0
+                    });
+                }
+
+                if (int.TryParse(GiftCode(item.Snippet.DisplayMessage), out int id2) && !OrderDictionary.ContainsKey(item.Id) 
+                    && Manage.Songlist.Find(s => s.ID == id2) != null)
+                {
+                    OrderDictionary.Add(item.Id, new Order()
+                    {
+                        UserID = item.AuthorDetails.ChannelId,
+                        UserName = item.AuthorDetails.DisplayName,
+                        SongID = id2,
+                        Code = 1
                     });
                 }
             }
@@ -78,33 +93,57 @@ namespace ZHTV.Functions.Online
             }
         }
 
-        private string ConvertToUnSign(string text)
-        {
-            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
-            string temp = text.Normalize(NormalizationForm.FormD);
-            return regex.Replace(temp, string.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
-        }
-
         private static string TextTrimming(string text)
         {
-            var syntaxZM = new Regex("^ZM [1-9][0-9]*$");
-            var syntaxZMT = new Regex("^ZMT .+$");
+            var zm = new Regex("^ZM [1-9][0-9]*$");
+            var zmt = new Regex("^ZMT .+$");
+
             string substr = null;
 
-            if (syntaxZM.IsMatch(text)) substr = text.Substring(3);
+            if (zm.IsMatch(text)) substr = text.Substring(3);
 
-            else if (syntaxZMT.IsMatch(text))
+            if (zmt.IsMatch(text))
             {
-                foreach (var item in Manage.SongDictionary.Values)
+                foreach (var item in Manage.Songlist)
                 {
                     if (string.Compare(item.Name, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();
-                    else if ((item.Name + " " + item.Artist).ToLower().Contains(text.Substring(4).ToLower()))
+                    else if (string.Compare(item.Name + " " + item.Artist, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();
                 }
             } 
-            
+
             return substr;
-        }   
+        }
+        
+        private static string GiftCode(string text)
+        {
+            var zma = new Regex("^ZMA .+$");
+            string substr = null;
+
+            if (zma.IsMatch(text))
+            {
+                if (Manage.Playlist.Where(s => s.Code == 1 && s.Artist.Contains(text.Substring(4))).Count() > 0)
+                {
+                    var index = Manage.Playlist.FindIndex(s => s.Code == 1 && s.Artist.Contains(text.Substring(4)));
+
+                    substr = Manage.Playlist[index].ID.ToString();
+                }
+                else
+                {
+                    foreach (var item in Manage.Songlist)
+                    {
+                        if (string.Compare(item.Artist, text.Substring(4), true) == 0)
+                        {
+                            var list = Manage.Songlist.Where(s => s.Artist.Contains(item.Artist)).ToList();
+
+                            substr = list[rd.Next(1, list.Count)].ID.ToString();
+                        }
+                    }
+                }    
+            }
+
+            return substr;
+        }
     }
 }

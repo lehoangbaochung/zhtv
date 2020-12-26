@@ -25,7 +25,7 @@ namespace ZHTV.Functions
                 {
                     left = d2;
                     element.Info.Margin = new Thickness(left, element.Info.Margin.Top, element.Info.Margin.Right, element.Info.Margin.Bottom);
-                    element.Info.Text = Display.Info()[rd.Next(0, Display.Info().Length)];
+                    element.Info.Text = Display.InfoList[rd.Next(0, Display.InfoList.Count)];
                 }
             };
 
@@ -100,7 +100,7 @@ namespace ZHTV.Functions
                     Youtube.Order(main.VideoId);
                     Display.SongBar(element);
                 }
-                catch (Exception) { timer.Stop(); }
+                catch (Exception) { }
             };
 
             timer.Start();
@@ -111,8 +111,8 @@ namespace ZHTV.Functions
     {
         public static void Start(InterfaceElement element)
         {
-            Info(element, -1500, 1150, 0.0005);
-            Playlist(element, -3500, 1200, 0.0005);
+            Info(element, -3000, 1150, 0.0005);
+            Playlist(element, -4000, 1200, 0.0005);
             Player(element, 1);
             Order(element, 20);
         }
