@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Zither Harp TV" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Zither Harp TV" Height="450" Width="800" ResizeMode="NoResize" Loaded="Main_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"></RowDefinition>
@@ -16,14 +16,17 @@
                 <Grid>
                     <StackPanel Margin="0" Grid.Row="0" Grid.Column="0">
                         <Label Content="_ID livestream:" Margin="5"></Label>
-                        <TextBox x:Name="tbxVideoID" Margin="5" HorizontalAlignment="Stretch"></TextBox>
+                        <TextBox x:Name="tbxVideoID" Margin="0 5 5 5" HorizontalAlignment="Stretch"></TextBox>
                         <Label Content="_Sheet:" ></Label>
                         <TextBox x:Name="tbxSheetID" Margin="0 5 5 5">1ICOivODkrc4A86I1JVEQ0sVEa-8XriKoG5O4116xiKo</TextBox>
                         <TextBlock Margin="5">Page</TextBlock>
-                        <TextBox x:Name="tbxSheetTab" Margin="5">Vietnamese</TextBox>
+                        <TextBox x:Name="tbxSheetTab" Margin="0 5 5 5">Vietnamese</TextBox>
                         <TextBlock Margin="5">Range</TextBlock>
-                        <TextBox x:Name="tbxSheetRange" Margin="5">A2:E</TextBox>
-
+                        <TextBox x:Name="tbxSheetRange" Margin="0 5 5 5">A2:E</TextBox>
+                        <TextBlock Margin="5">Page</TextBlock>
+                        <TextBox x:Name="tbxInfoSheet" Margin="0 5 5 5">Info</TextBox>
+                        <TextBlock Margin="5">Range</TextBlock>
+                        <TextBox x:Name="tbxInfoSheetRange" Margin="0 5 5 5">A2:B</TextBox>
                     </StackPanel>
 
                 </Grid>
@@ -35,18 +38,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <GroupBox Header="Offline"/>
-                        <StackPanel Margin="20">
-                            <Label>Music folder:</Label>
-                            <TextBlock x:Name="musicFolderPath" Width="500" HorizontalAlignment="Left"></TextBlock>
-                        </StackPanel>
-                    </Grid>
-
                 </Grid>
             </TabItem>
-            
+
         </TabControl>
         <!--<TabItem Header="Danh mục" Tag="/Images/Daily Activity/video_red.png" DataContext="/Images/Daily Activity/video_gray.png" Template="{DynamicResource tabItemTemplate}"></TabItem>-->
         <Grid Grid.Row="1">

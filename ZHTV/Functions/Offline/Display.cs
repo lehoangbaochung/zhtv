@@ -15,12 +15,6 @@ namespace ZHTV.Functions
         public static readonly List<string> InfoList = new List<string>();
         public static readonly List<Theme> ThemeList = new List<Theme>();
 
-        public static void Screen(InterfaceElement element)
-        {
-            ArtistImage(element);
-            PlayingSongName(element);
-        }
-
         public static void SongBar(InterfaceElement element)
         {
             if (element.WindowName == "MusicUI")
@@ -40,7 +34,7 @@ namespace ZHTV.Functions
 
         public static string SyntaxOrder()
         {
-            return "Soạn tin: ZM " + Manage.Songlist[rd.Next(1, Manage.Songlist.Count)].ID + " gửi 6" + rd.Next(1, 7) + "77";
+            return "Soạn tin: ZM " + Manage.SongList[rd.Next(1, Manage.SongList.Count)].ID + " gửi 6" + rd.Next(1, 7) + "77";
         }
 
         public static void Theme(InterfaceElement element)
@@ -116,14 +110,14 @@ namespace ZHTV.Functions
             }
         }
 
-        protected static void PlayingSongName(InterfaceElement element)
+        public static void PlayingSongName(InterfaceElement element)
         {
             if (Manage.Playlist[0].User.Count == 0)
-                element.PlayingSongName.Text = " Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist 
+                element.PlayingSongName.Text = " Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist
                 + " \n Mã số: " + Manage.Playlist[0].ID + " ";
             else
                 element.PlayingSongName.Text = " Khán giả yêu cầu nhiều nhất: " + Manage.Playlist[0].User.ElementAt(Manage.Playlist[0].User.Count - 1).Value
-                + " \n Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID + " ";
+                + " \n Đang phát: " + Manage.Playlist[0].Name + " \n Thể hiện: " + Manage.Playlist[0].Artist + " \n Mã số: " + Manage.Playlist[0].ID + " ";   
         }
 
         protected static void ArtistImage(InterfaceElement element)

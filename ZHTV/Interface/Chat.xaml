@@ -24,7 +24,7 @@
         <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
         <!-- Logo kênh -->
         <Grid Grid.Row="0" Grid.Column="1" >
-            <Image Source="D:\Code\C#\ZHTV\ZHTV\Images\Logo\ZHTV-Logo.png"
+            <Image Source="/ZHTV;component/Resources/ZHTV-Logo.png"
                    HorizontalAlignment="Right"
                    VerticalAlignment="Top"
                    Margin="250 10 10 0">
@@ -108,7 +108,7 @@
                 <!-- Button -->
                 <Button x:Name="btnSyntax" Grid.Column="7" Width="180" Height="177" FontSize="25" VerticalAlignment="Top" BorderBrush="Transparent">
                     <Button.Background>
-                        <ImageBrush ImageSource="D:\Code\C#\ZHTV\ZHTV\Images\Logo\Zither Harp-Logo.png" Stretch="Uniform"/>
+                        <ImageBrush ImageSource="/ZHTV;component/Resources/Zither Harp-Logo.png" Stretch="Uniform"/>
                     </Button.Background>
                     <Button.Content>
                         <TextBlock Foreground="Black" TextAlignment="Center" FontWeight="Bold"></TextBlock>

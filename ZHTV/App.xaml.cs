@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace ZHTV
 {
@@ -13,5 +7,13 @@ namespace ZHTV
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            InitializeComponent();
+
+            var settings = new CefSharp.Wpf.CefSettings();
+            settings.CefCommandLineArgs["autoplay-policy"] = "no-user-gesture-required";
+            CefSharp.Cef.Initialize(settings, true, browserProcessHandler: null);
+        }
     }
 }

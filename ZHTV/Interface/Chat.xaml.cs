@@ -13,7 +13,6 @@ namespace ZHTV
 
             var element = new InterfaceElement
             {
-                Player = Player,
                 Info = txtInfo,
                 Screen = imgScreen,
                 OrderButton = btnSyntax,
@@ -30,8 +29,7 @@ namespace ZHTV
                 Playlist = txtPlaylist
             };
 
-            Manage.Play(element);
-            Display.Screen(element);
+
             Display.SongBar(element);
             ChatTimer.Start(element);
         }

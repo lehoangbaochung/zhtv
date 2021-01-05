@@ -61,7 +61,7 @@ namespace ZHTV.Functions.Online
             foreach (var item in MessageList(videoId, "snippet,authorDetails").Items)
             {
                 if (int.TryParse(TextTrimming(item.Snippet.DisplayMessage), out int id) && !OrderDictionary.ContainsKey(item.Id) 
-                    && Manage.Songlist.Find(s => s.ID == id) != null)
+                    && Manage.SongList.Find(s => s.ID == id) != null)
                 {
                     OrderDictionary.Add(item.Id, new Order()
                     {
@@ -73,7 +73,7 @@ namespace ZHTV.Functions.Online
                 }
 
                 if (int.TryParse(GiftCode(item.Snippet.DisplayMessage), out int id2) && !OrderDictionary.ContainsKey(item.Id) 
-                    && Manage.Songlist.Find(s => s.ID == id2) != null)
+                    && Manage.SongList.Find(s => s.ID == id2) != null)
                 {
                     OrderDictionary.Add(item.Id, new Order()
                     {
@@ -104,7 +104,7 @@ namespace ZHTV.Functions.Online
 
             if (zmt.IsMatch(text))
             {
-                foreach (var item in Manage.Songlist)
+                foreach (var item in Manage.SongList)
                 {
                     if (string.Compare(item.Name, text.Substring(4), true) == 0)
                         substr = item.ID.ToString();
@@ -131,11 +131,11 @@ namespace ZHTV.Functions.Online
                 }
                 else
                 {
-                    foreach (var item in Manage.Songlist)
+                    foreach (var item in Manage.SongList)
                     {
                         if (string.Compare(item.Artist, text.Substring(4), true) == 0)
                         {
-                            var list = Manage.Songlist.Where(s => s.Artist.Contains(item.Artist)).ToList();
+                            var list = Manage.SongList.Where(s => s.Artist.Contains(item.Artist)).ToList();
 
                             substr = list[rd.Next(1, list.Count)].ID.ToString();
                         }

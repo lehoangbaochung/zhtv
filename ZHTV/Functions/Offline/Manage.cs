@@ -11,17 +11,19 @@ namespace ZHTV.Functions.Online
         static readonly Random rd = new Random();
         static readonly int MinOrderSongNumber = 15;
         public static readonly List<Song> Playlist = new List<Song>();
-        public static readonly List<Song> Songlist = new List<Song>();
+        public static readonly List<Song> SongList = new List<Song>();
+        public static Song NextSong;
 
         public static void Play(InterfaceElement element)
         {
-            element.Player.Source = new Uri(@"D:\Youtube\Zither Harp TV\Music\" + Playlist[0].ID + ".mp3");
+            element.WebBrowser.Load("https://www.youtube.com/embed/" + Playlist[0].PlayerUri + "?autoplay=1");
         }
 
         public static void FillNextSongs()
         {
             if (Playlist.Count != 0)
             {
+                NextSong = Playlist[0];
                 Playlist[0].User.Clear();
                 Playlist[0].Code = -1;
                 Playlist.RemoveAt(0);
@@ -29,7 +31,7 @@ namespace ZHTV.Functions.Online
 
             while (Playlist.Count < MinOrderSongNumber)
             {
-                var song = Songlist[rd.Next(0, Songlist.Count - 1)];
+                var song = SongList[rd.Next(0, SongList.Count - 1)];
 
                 if (!Playlist.Contains(song)) Playlist.Add(song);
             }
@@ -43,7 +45,7 @@ namespace ZHTV.Functions.Online
 
                 if (index == -1) // Bài hát chưa được order, thêm vào list
                 {
-                    var song = Songlist.Find(s => s.ID == order.SongID);
+                    var song = SongList.Find(s => s.ID == order.SongID);
 
                     Sort(song, order);
                 }
@@ -61,7 +63,7 @@ namespace ZHTV.Functions.Online
             song.User.Add(order.UserID, order.UserName);
             song.Code = order.Code;
 
-            // if (order.UserID == "UCux2CF0xv1BgErYwysx-NyA") song.User.Add("ClownLord", order.UserName);
+            /// if (order.UserID == "UCux2CF0xv1BgErYwysx-NyA") song.User.Add("ClownLord", order.UserName);
 
             var newSong = song;
             Playlist.Remove(song);

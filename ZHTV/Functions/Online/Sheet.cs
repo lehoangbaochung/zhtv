@@ -16,8 +16,11 @@ namespace ZHTV.Functions.Online
     {
         static readonly string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
         static readonly string ApplicationName = "Google SpeadSheet";
+        static SpreadsheetsResource.ValuesResource.GetRequest request;
+        static ValueRange response;
+        static IList<IList<object>> values;
 
-        public static IList<IList<object>> GetValue(MainWindowElement element)
+        private static SheetsService Service()
         {
             UserCredential credential;
 
@@ -34,62 +37,61 @@ namespace ZHTV.Functions.Online
                 ApplicationName = ApplicationName
             });
 
-            SpreadsheetsResource.ValuesResource.GetRequest request;
-
-            if (element.SheetTab == null) request = service.Spreadsheets.Values.Get(element.SheetId, element.SheetRange);
-            else request = service.Spreadsheets.Values.Get(element.SheetId, element.SheetTab + "!" + element.SheetRange);
-
-            ValueRange response = request.Execute();
-            IList<IList<object>> values = response.Values;
-
-            return values;
+            return service;
         }
 
-        private static void Song(IList<IList<object>> values)
+        private static void Song(string sheetId)
         {
+            request = Service().Spreadsheets.Values.Get(sheetId, "Vietnamese!A2:F");
+            response = request.Execute();
+            values = response.Values;
+
             if (values != null && values.Count > 0)
             {
                 foreach (var row in values)
                 {
-                    Manage.Songlist.Add(new Song 
-                    { 
-                        ID = Convert.ToInt32(row[0]), 
-                        Name = row[1].ToString(), 
-                        Artist = row[2].ToString(),
-                        AlbumUri = row[3].ToString(),
-                        ArtistUri = row[4].ToString()
-                    });
-                }
-            }
-        }
-
-        private static void Theme(IList<IList<object>> values)
-        {
-            if (values != null && values.Count > 0)
-            {
-                foreach (var row in values)
-                {
-                    Display.ThemeList.Add(new Theme
+                    Manage.SongList.Add(new Song
                     {
-                        Name = row[0].ToString(),
-                        OrderCount = row[2].ToString(),
-                        Song = row[3].ToString(),
-                        Playlist = row[4].ToString()
+                        ID = Convert.ToInt32(row[0]),
+                        Name = row[1].ToString(),
+                        Artist = row[2].ToString(),
+                        Duration = Convert.ToDouble(row[3]),
+                        PlayerUri = row[4].ToString(),
+                        AlbumUri = row[5].ToString()
                     });
                 }
             }
         }
 
-        private static void Info(IList<IList<object>> values)
+        private static void Theme(string sheetId)
         {
+            request = Service().Spreadsheets.Values.Get(sheetId, "Theme!A2:B");
+            response = request.Execute();
+            values = response.Values;
+
+            if (values != null && values.Count > 0)
+            {
+                foreach (var row in values)
+                {
+                    
+                }
+            }
+        }
+
+        private static void Info(string sheetId)
+        {
+            request = Service().Spreadsheets.Values.Get(sheetId, "Info!A2:B");
+            response = request.Execute();
+            values = response.Values;
+
             if (values != null && values.Count > 0) foreach (var row in values) Display.InfoList.Add(row[1].ToString());
         }
 
         public static void Bind(MainWindowElement element)
         {
-            Song(GetValue(element));
-            Info(GetValue(element));
-            Theme(GetValue(element));
+            Song(element.SheetId);
+            Info(element.SheetId);
+            //Theme(element.SheetId);
         }
     }
 }

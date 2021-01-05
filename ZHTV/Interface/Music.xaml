@@ -3,7 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cef="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
+        Loaded="MusicUI_Loaded"
         Title="Zither Harp TV - Music" WindowState="Maximized" WindowStyle="None" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
@@ -11,20 +13,13 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!-- Trình phát nhạc -->
-        <MediaElement x:Name="Player" LoadedBehavior="Play" Volume="200"></MediaElement>
-        
-        <!-- Ảnh màn hình -->
-        <Image x:Name="imgScreen" Margin="10"></Image>
-        <!-- Logo kênh -->
-        <Image Source="/ZHTV;component/Resources/ZHTV-Logo.png" Margin="1150 40 10 0" HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
-        <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1100 10 140 520"
-                HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
-        <TextBlock x:Name="txtTilte" Text="Trực tiếp" Foreground="Black" Margin="450 140 70 0"
-                    FontSize="22" FontWeight="Bold"
-                    HorizontalAlignment="Right" VerticalAlignment="Top">
-        </TextBlock>
+        <cef:ChromiumWebBrowser x:Name="wbPlayer" Grid.RowSpan="2"/>
 
+        <!-- Logo kênh -->
+        <TextBlock Text="HD" FontSize="35" FontWeight="Bold" Foreground="White" Margin="1150 40 10 0" HorizontalAlignment="Right" VerticalAlignment="Top"></TextBlock>
+        <Image Source="/ZHTV;component/Resources/ZHTV-Logo.png" Margin="1100 40 60 0" HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
+        <Image Source="D:\Youtube\Zither Harp TV\Background\Christmas\hat3-removebg-preview.png" Stretch="Fill" Margin="1050 10 180 520"
+                HorizontalAlignment="Right" VerticalAlignment="Top"></Image>
         <TextBlock x:Name="txtNextSong" Text="" FontSize="25" Margin="40 0 40 60" VerticalAlignment="Bottom" HorizontalAlignment="Left" Background="White"></TextBlock>
         <TextBlock x:Name="txtInfo" Text="" FontSize="22" Margin="700 0 300 10" VerticalAlignment="Bottom"></TextBlock>
         <TextBlock x:Name="txtOrder" Text="" FontSize="22" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom"></TextBlock>
