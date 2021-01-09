@@ -10,10 +10,6 @@ namespace ZHTV
         public App()
         {
             InitializeComponent();
-
-            var settings = new CefSharp.Wpf.CefSettings();
-            settings.CefCommandLineArgs["autoplay-policy"] = "no-user-gesture-required";
-            CefSharp.Cef.Initialize(settings, true, browserProcessHandler: null);
         }
     }
 }

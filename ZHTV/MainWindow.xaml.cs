@@ -1,34 +1,15 @@
-﻿using OpenQA.Selenium.Chrome;
-using System.Windows;
+﻿using System.Windows;
 using ZHTV.Functions.Online;
 using ZHTV.Interface;
 using ZHTV.Models.Windows;
-using CefSharp;
-using CefSharp.Wpf;
 
 namespace ZHTV
 {
     public partial class MainWindow : Window
     {
-        public readonly ChromiumWebBrowser browser;
-
         public MainWindow()
         {
             InitializeComponent();
-
-
-
-            //cefDriver = new ChromeDriver(options);
-
-            //ChromeDriver chromeDriver = new ChromeDriver();
-
-            //chromeDriver.Navigate().GoToUrl("https://www.youtube.com/embed/1yWnaD5EXgQ");
-
-            //var button = chromeDriver.FindElementByXPath("//*[@id=\"movie_player\"]/div[4]/button");
-
-            //button.Click();
-            //MyMediaElement.MediaFailed += MyMediaElement_MediaFailed;
-            //MyMediaElement.LoadedBehavior = MediaState.Play;
         }
 
         void MyMediaElement_MediaFailed(object sender, ExceptionRoutedEventArgs e)

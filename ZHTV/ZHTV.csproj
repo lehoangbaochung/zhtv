@@ -118,15 +118,6 @@
     <Reference Include="Google.Apis.YouTube.v3, Version=1.49.0.2148, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.YouTube.v3.1.49.0.2148\lib\net45\Google.Apis.YouTube.v3.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.2.7.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.2.7\lib\net45\MaterialDesignColors.dll</HintPath>
-    </Reference>
-    <Reference Include="MaterialDesignThemes.Wpf, Version=3.2.0.1979, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignThemes.3.2.0\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
@@ -153,7 +144,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Interface\Chat.xaml">
+    <Page Include="Interfaces\Chat.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -163,19 +154,18 @@
     </Compile>
     <Compile Include="Functions\Offline\Display.cs" />
     <Compile Include="Functions\Offline\Timer.cs" />
-    <Compile Include="Interface\Music.xaml.cs">
+    <Compile Include="Interfaces\Music.xaml.cs">
       <DependentUpon>Music.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Levenshtein.cs" />
-    <Compile Include="Interface\Chat.xaml.cs">
+    <Compile Include="Interfaces\Chat.xaml.cs">
       <DependentUpon>Chat.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Interface\Music.xaml">
+    <Page Include="Interfaces\Music.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResourceDictionary\ChatResDict.xaml">
+    <Page Include="Dictionaries\ChatResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,11 +173,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ResourceDictionary\MainResDict.xaml">
+    <Page Include="Dictionaries\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="ResourceDictionary\MusicResDict.xaml">
+    <Resource Include="Dictionaries\MusicResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Resource>
