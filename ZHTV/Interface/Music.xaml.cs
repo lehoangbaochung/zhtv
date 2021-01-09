@@ -9,38 +9,27 @@ namespace ZHTV.Interface
     {
         public Music()
         {
-            InitializeComponent();  
-        }
+            InitializeComponent();
 
-        private void MusicUI_Loaded(object sender, RoutedEventArgs e)
-        {
-            wbPlayer.IsBrowserInitializedChanged += OnIsBrowserInitializedChanged;
-        }
-
-        private void OnIsBrowserInitializedChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            if (wbPlayer.IsBrowserInitialized)
+            var element = new InterfaceElement
             {
-                var element = new InterfaceElement
-                {
-                    WindowName = Name,
-                    WebBrowser = wbPlayer,
-                    Info = txtInfo,
-                    OrderText = txtOrder,
-                    PlayingSongName = txtNextSong,
-                    SongName1 = txtSong1,
-                    SongName2 = txtSong2,
-                    SongName3 = txtSong3,
-                    SongOrderCount1 = prbSong1,
-                    SongOrderCount2 = prbSong2,
-                    SongOrderCount3 = prbSong3,
-                    Playlist = txtPlaylist,
-                };
+                WindowName = Name,
+                Browser = wbPlay,
+                Info = txtInfo,
+                OrderText = txtOrder,
+                PlayingSongName = txtNextSong,
+                SongName1 = txtSong1,
+                SongName2 = txtSong2,
+                SongName3 = txtSong3,
+                SongOrderCount1 = prbSong1,
+                SongOrderCount2 = prbSong2,
+                SongOrderCount3 = prbSong3,
+                Playlist = txtPlaylist,
+            };
 
-                Manage.Play(element);
-                Display.SongBar(element);
-                MusicTimer.Start(element);
-            }
+            Manage.Play(element);
+            Display.SongBar(element);
+            MusicTimer.Start(element);
         }
 
         private void btnLogo_Click(object sender, RoutedEventArgs e)

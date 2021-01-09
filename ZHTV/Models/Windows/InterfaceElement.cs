@@ -6,7 +6,7 @@ namespace ZHTV.Models.Windows
     class InterfaceElement
     {
         public string WindowName { get; set; }
-        public ChromiumWebBrowser WebBrowser { get; set; }
+        public WebBrowser Browser { get; set; }
         public Image Background { get; set; }
         public Image Screen { get; set; }
         public Image SongImage1 { get; set; }

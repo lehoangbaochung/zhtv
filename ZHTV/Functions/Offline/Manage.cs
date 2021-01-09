@@ -12,18 +12,18 @@ namespace ZHTV.Functions.Online
         static readonly int MinOrderSongNumber = 15;
         public static readonly List<Song> Playlist = new List<Song>();
         public static readonly List<Song> SongList = new List<Song>();
-        public static Song NextSong;
+        public static Song PlayingSong;
 
         public static void Play(InterfaceElement element)
         {
-            element.WebBrowser.Load("https://www.youtube.com/embed/" + Playlist[0].PlayerUri + "?autoplay=1");
+            element.Browser.Navigate("http://youtube.com./watch?v=" + Playlist[0].PlayerUri);
+            PlayingSong = Playlist[0];
         }
 
         public static void FillNextSongs()
         {
             if (Playlist.Count != 0)
             {
-                NextSong = Playlist[0];
                 Playlist[0].User.Clear();
                 Playlist[0].Code = -1;
                 Playlist.RemoveAt(0);
